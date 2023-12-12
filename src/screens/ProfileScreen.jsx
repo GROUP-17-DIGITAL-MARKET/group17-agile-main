@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {View, SafeAreaView, StyleSheet, Alert} from 'react-native';
+import {View, SafeAreaView, StyleSheet, Alert, ImageBackground} from 'react-native';
 import {
   Avatar,
   Title,
@@ -14,6 +14,8 @@ import { MaterialIcons,Ionicons, MaterialCommunityIcons, Fontisto , FontAwesome5
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { doc, getDoc } from 'firebase/firestore';
 import uuid from 'react-native-uuid';
+
+const background = require('../../assets/profilebackground.png');
 
 
 const ProfileScreen = ({navigation}) => {
@@ -60,6 +62,7 @@ const ProfileScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ImageBackground  source={background} style={styles.background} >
 
       <View style={styles.userInfoSection}>
 
@@ -126,12 +129,7 @@ const ProfileScreen = ({navigation}) => {
             <Text style={styles.menuItemText}>Payment</Text>
           </View>
         </TouchableRipple>
-        <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-            <Icon name="account-check-outline" color="#141414" size={25}/>
-            <Text style={styles.menuItemText}>Support</Text>
-          </View>
-        </TouchableRipple>
+         
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
             <Ionicons name="settings-sharp" size={25} color="#141414" />
@@ -151,6 +149,7 @@ const ProfileScreen = ({navigation}) => {
           </View>
         </TouchableRipple>
       </View>
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -161,6 +160,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop:40
+  },
+  background: {
+    flex: 1,
+    // justifyContent: 'center',
   },
   userInfoSection: {
     paddingHorizontal: 30,
@@ -186,6 +189,11 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     flexDirection: 'row',
     height: 100,
+    width:350,
+    backgroundColor:"#fff",
+    alignSelf:"center",
+    borderRadius:20
+
   },
   infoBox: {
      width: '33.3%',
@@ -194,11 +202,15 @@ const styles = StyleSheet.create({
   },
   menuWrapper: {
     marginTop: 10,
+    alignItems:"center"
   },
   menuItem: {
     flexDirection: 'row',
     paddingVertical: 15,
     paddingHorizontal: 30,
+    width:370,
+    backgroundColor:"#fff",
+    marginVertical:5
   },
   menuItemText: {
     color: '#777777',

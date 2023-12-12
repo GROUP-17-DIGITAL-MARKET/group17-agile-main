@@ -214,7 +214,7 @@ export default function Cart({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#F2F2F2',
         paddingHorizontal: 10,
         paddingTop: 60,
         gap: 15,
