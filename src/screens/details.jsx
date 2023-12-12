@@ -19,15 +19,16 @@ export default function Details({ navigation, route }) {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor='white' />
-            <View>
+            <View style={{justifyContent:"center", alignItems:"center"}}>
                 <Image
-                    resizeMode="contain"
+                     resizeMode="contain"
                     style={{
                         height: 300,
                         borderBottomRightRadius: 15,
-                        borderBottomLeftRadius: 15
+                        borderBottomLeftRadius: 15,
+                        width:300
                     }}
-                    source={{ uri: img }} />
+                    source={ img } />
             </View>
 
             <View style={{

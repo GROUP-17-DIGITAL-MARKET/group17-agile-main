@@ -55,7 +55,7 @@ const Orderplaced = ({navigation}) => {
             <TouchableOpacity
                 onPress={() => {
                     
-                    navigation.navigate('HomeScreen')
+                    navigation.navigate('TrackOrder')
                 }}
                 activeOpacity={0.8}
                 style={{

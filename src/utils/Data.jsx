@@ -1,27 +1,27 @@
 export const recommended = [
     {
-      name: "apple",
+      name: "Broccoli",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://w7.pngwing.com/pngs/265/75/png-transparent-ipod-touch-apple-icon-format-icon-large-red-apples-closeup-of-red-apples-natural-foods-food-eating.png",
+      img: require('../../assets/Broccoli.jpg'),
     },
     {
-      name: "banana",
+      name: "Onion",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://e7.pngegg.com/pngimages/955/492/png-clipart-banana-powder-fruit-cavendish-banana-banana-yellow-banana-fruit-food-image-file-formats.png",
+      img: require('../../assets/Onion.png'),
     },
     {
       name: "orange",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://w7.pngwing.com/pngs/1001/506/png-transparent-slices-of-oranges-orange-juice-flavor-fruit-nutritious-orange-natural-foods-food-orange.png",
+      img: require('../../assets/FruitsAndVegetables/FaV.png'),
     },
     {
       name: "pine apple",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://static.vecteezy.com/system/resources/previews/008/848/362/non_2x/fresh-pineapple-free-png.png",
+      img: require('../../assets/FruitsAndVegetables/FaV.png'),
     },
   ];
 
@@ -31,6 +31,10 @@ export const recommended = [
     {
       name: "Fruits",
       img: require('../../assets/Fruits.png'),
+    },
+    {
+      name: "Cereals",
+      img: require('../../assets/grains.png'),
     },
     {
       name: "Meat",
@@ -75,69 +79,128 @@ export const recommended = [
 
   export const fruitsAndvegetables = [
     {
-      name: "apple",
+      name: "Tomato",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://w7.pngwing.com/pngs/265/75/png-transparent-ipod-touch-apple-icon-format-icon-large-red-apples-closeup-of-red-apples-natural-foods-food-eating.png",
+      img: require('../../assets/FruitsAndVegetables/FaV.png'),
     },
     {
-      name: "banana",
+      name: "Orange",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://e7.pngegg.com/pngimages/955/492/png-clipart-banana-powder-fruit-cavendish-banana-banana-yellow-banana-fruit-food-image-file-formats.png",
+      img: require('../../assets/FruitsAndVegetables/FaV2.png'),
     },
     {
-      name: "orange",
+      name: "Onion",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://w7.pngwing.com/pngs/1001/506/png-transparent-slices-of-oranges-orange-juice-flavor-fruit-nutritious-orange-natural-foods-food-orange.png",
+      img: require('../../assets/FruitsAndVegetables/FaV3.png'),
     },
     {
-      name: "pine apple",
+      name: "Strawberry",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://static.vecteezy.com/system/resources/previews/008/848/362/non_2x/fresh-pineapple-free-png.png",
+      img: require('../../assets/FruitsAndVegetables/FaV4.png'),
     },
     {
-      name: "pine apple",
+      name: "Cauliflower",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://static.vecteezy.com/system/resources/previews/008/848/362/non_2x/fresh-pineapple-free-png.png",
+      img: require('../../assets/FruitsAndVegetables/FaV5.png'),
     },
     {
-      name: "pine apple",
+      name: "Apple",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://static.vecteezy.com/system/resources/previews/008/848/362/non_2x/fresh-pineapple-free-png.png",
+      img: require('../../assets/FruitsAndVegetables/FaV6.png'),
+    },
+  ];
+
+
+
+
+  export const Spice = [
+    {
+      name: "Parsley",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Spices/spice.png'),
     },
     {
-      name: "pine apple",
+      name: "Rosemary",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://static.vecteezy.com/system/resources/previews/008/848/362/non_2x/fresh-pineapple-free-png.png",
+      img: require('../../assets/Spices/spice1.png'),
     },
     {
-      name: "pine apple",
+      name: "Ginger",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://static.vecteezy.com/system/resources/previews/008/848/362/non_2x/fresh-pineapple-free-png.png",
+      img: require('../../assets/Spices/spice2.png'),
     },
     {
-      name: "pine apple",
+      name: "Garlic",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://static.vecteezy.com/system/resources/previews/008/848/362/non_2x/fresh-pineapple-free-png.png",
+      img: require('../../assets/Spices/spice3.png'),
     },
     {
-      name: "pine apple",
+      name: "Negro Pepper",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: "https://static.vecteezy.com/system/resources/previews/008/848/362/non_2x/fresh-pineapple-free-png.png",
+      img: require('../../assets/Spices/spice4.png'),
+    },
+    {
+      name: "Curry",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Spices/spice5.png'),
     },
   ];
 
 
   
+  export const Cereal = [
+    {
+      name: "Red Beans",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Cereals/cereal.png'),
+    },
+    {
+      name: "Oats",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Cereals/cereal1.png'),
+    },
+    {
+      name: "Corn",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Cereals/cereal2.png'),
+    },
+    {
+      name: "Peanut",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Cereals/cereal3.png'),
+    },
+    {
+      name: "Green Pea",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Cereals/cereal4.png'),
+    },
+    {
+      name: "Sorghum",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Cereals/cereal5.png'),
+    },
+  ];
+
+  
+
   export const MarketsList = [
     {
       img: require('../../assets/dome.png'),

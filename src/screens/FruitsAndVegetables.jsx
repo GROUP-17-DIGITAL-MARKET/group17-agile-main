@@ -76,7 +76,7 @@ export default function FruitsAndVegetables() {
               paddingBottom: 5,
             }}
           >
-            <Image style={{ height: 125, resizeMode: 'contain' }} source={{ uri: item.img }} />
+            <Image style={{ height: 125, resizeMode: 'contain' }} source={ item.img} />
             <View style={{ paddingHorizontal: 10, gap: 5 }}>
               <Text style={{ fontSize: 17, fontWeight: 600, color: '#008000' }}>
                 {item.name.charAt(0).toUpperCase() + item.name.slice(1)}

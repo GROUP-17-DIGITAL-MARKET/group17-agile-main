@@ -3,6 +3,18 @@ import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, ScrollView } f
 import { SafeAreaView } from 'react-native-safe-area-context';
 const Fruits = require('../../assets/Fruits.png');
 
+
+const Grains = require('../../assets/grains.png');
+const Meat = require('../../assets/Meat.png');
+const Dairy = require('../../assets/Dairy.png');
+const Beverages = require('../../assets/beverages.png');
+const Cereals = require('../../assets/cereals.png');
+const Fish = require('../../assets/Fish.png');
+const Spice = require('../../assets/Spice.png');
+const Oil = require('../../assets/Oil.png');
+
+
+
 export default function Category({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
@@ -19,7 +31,7 @@ export default function Category({ navigation }) {
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Spices')}>
                     <View style={styles.categoryrapper}>
                         <View style={styles.category}>
-                            <Image source={Fruits} style={styles.categoryimage} />
+                            <Image source={Spice} style={styles.categoryimage} />
                         </View>
                         <Text style={styles.categorytext}>Spices</Text>
                     </View>
@@ -28,7 +40,7 @@ export default function Category({ navigation }) {
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Cereals')}>
                     <View style={styles.categoryrapper}>
                         <View style={styles.category}>
-                            <Image source={Fruits} style={styles.categoryimage} />
+                            <Image source={Cereals} style={styles.categoryimage} />
                         </View>
                         <Text style={styles.categorytext}>Cereals</Text>
                     </View>  
@@ -41,19 +53,19 @@ export default function Category({ navigation }) {
                 <View  style={styles.categories}>
                     <View style={styles.categoryrapper}>
                         <View style={styles.category}>
-                            <Image source={Fruits} style={styles.categoryimage} />
+                            <Image source={Beverages} style={styles.categoryimage} />
                         </View>
                         <Text style={styles.categorytext}>Beverages</Text>
                     </View>
                     <View style={styles.categoryrapper}>
                         <View style={styles.category}>
-                            <Image source={Fruits} style={styles.categoryimage} />
+                            <Image source={Dairy} style={styles.categoryimage} />
                         </View>
-                        <Text style={styles.categorytext}>Spices</Text>
+                        <Text style={styles.categorytext}>Dairy</Text>
                     </View>
                     <View style={styles.categoryrapper}>
                         <View style={styles.category}>
-                            <Image source={Fruits} style={styles.categoryimage} />
+                            <Image source={Oil} style={styles.categoryimage} />
                         </View>
                         <Text style={styles.categorytext}>Oil</Text>
                     </View>
@@ -62,19 +74,19 @@ export default function Category({ navigation }) {
                 <View  style={styles.categories}>
                     <View style={styles.categoryrapper}>
                         <View style={styles.category}>
-                            <Image source={Fruits} style={styles.categoryimage} />
+                            <Image source={Fish} style={styles.categoryimage} />
                         </View>
                         <Text style={styles.categorytext}>Fish</Text>
                     </View>
                     <View style={styles.categoryrapper}>
                         <View style={styles.category}>
-                            <Image source={Fruits} style={styles.categoryimage} />
+                            <Image source={Meat} style={styles.categoryimage} />
                         </View>
-                        <Text style={styles.categorytext}>Cereals</Text>
+                        <Text style={styles.categorytext}>Meat</Text>
                     </View>
                     <View style={styles.categoryrapper}>
                         <View style={styles.category}>
-                            <Image source={Fruits} style={styles.categoryimage} />
+                            <Image source={Grains} style={styles.categoryimage} />
                         </View>
                         <Text style={styles.categorytext}>Grains</Text>
                     </View>

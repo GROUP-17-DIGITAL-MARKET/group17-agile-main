@@ -21,7 +21,8 @@ import OderPlaced from './src/screens/Order-placed';
 import Checkout from './src/screens/CheckOut';
 import { Provider } from 'react-redux';
 import { Store } from './Redux/Store';
-import FluterPayScreen from './Payment/FlutterPayScreen';
+import TrackOrder from './src/screens/Track_order_Screen';
+ 
 
 
 
@@ -36,7 +37,7 @@ export default function App() {
     <Provider store={Store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName='Splash'
+          initialRouteName='HomeScreen'
           screenOptions={{
             headerShown: false
           }}>
@@ -56,7 +57,7 @@ export default function App() {
           <Stack.Screen name="Cart" component={BottomTabs} />
           <Stack.Screen name="Checkout" component={Checkout} />
           <Stack.Screen name="OderPlaced" component={OderPlaced} />
-          <Stack.Screen name="FluterPayScreen" component={FluterPayScreen} />
+          <Stack.Screen name="TrackOrder" component={TrackOrder} />
 
         </Stack.Navigator>
       </NavigationContainer>
@@ -113,9 +114,6 @@ const BottomTabs = ({ navigation }) => {
           ),
         }}
       />
-
-
-
 
       <Tab.Screen name="CartPage" component={Cart}
         options={{

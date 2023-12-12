@@ -14,7 +14,7 @@ import {Picker} from '@react-native-picker/picker';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { useNavigation } from '@react-navigation/native';
-import { fruitsAndvegetables } from '../utils/Data';
+import { Spice } from '../utils/Data';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../Redux/CartSlice';
 
@@ -26,7 +26,7 @@ export default function Spices() {
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredData = fruitsAndvegetables.filter((item) => {
+  const filteredData = Spice.filter((item) => {
     return (
       (filter === 'all' || item.name.toLowerCase().includes(filter.toLowerCase())) &&
       item.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -45,7 +45,7 @@ export default function Spices() {
           <Picker.Item label="Apple" value="apple" />
           <Picker.Item label="Banana" value="banana" />
           <Picker.Item label="Orange" value="orange" />
-          {/* Add more items as needed */}
+          
         </Picker>
         <TextInput
           style={styles.searchInput}
@@ -77,7 +77,7 @@ export default function Spices() {
               paddingBottom: 5,
             }}
           >
-            <Image style={{ height: 125, resizeMode: 'contain' }} source={{ uri: item.img }} />
+            <Image style={{ height: 125, resizeMode: 'contain' }} source={ item.img} />
             <View style={{ paddingHorizontal: 10, gap: 5 }}>
               <Text style={{ fontSize: 17, fontWeight: 600, color: '#008000' }}>
                 {item.name.charAt(0).toUpperCase() + item.name.slice(1)}

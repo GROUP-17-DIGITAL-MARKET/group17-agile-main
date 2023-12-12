@@ -46,9 +46,7 @@ export default function Cart({ navigation }) {
                             }}>
                                 <Image
                                     style={{ height: 120, width: 120, resizeMode: "contain" }}
-                                    source={{
-                                        uri: item.img
-                                    }}
+                                    source={item.img}
                                 />
                             </View>
 

@@ -76,12 +76,12 @@ export default function HomeScreen({ navigation }) {
 
                 <View style={styles.marketlabel}>
                     <Text style={{ color: "#808080", fontSize: 18, fontWeight: 600 }}>Markets</Text>
-                    <Text 
-                    onPress={() => navigation.navigate('Markets')}
-                    style={{
-                        color: "#53E559",
-                        fontWeight: "bold"
-                    }}
+                    <Text
+                        onPress={() => navigation.navigate('Markets')}
+                        style={{
+                            color: "#53E559",
+                            fontWeight: "bold"
+                        }}
                     >See all</Text>
                 </View>
 
@@ -108,13 +108,34 @@ export default function HomeScreen({ navigation }) {
 
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.tags}>
                     <View style={styles.tag}>
-                        <Text style={{ color: "#fff" }}>Fruits</Text>
+                        <Text style={{ color: "#fff", fontSize:15, fontWeight:"bold" }}>Fruits</Text>
                     </View>
-                    <View style={styles.tag}>
-                        <Text style={{ color: "#fff" }}>Tomato</Text>
+                    <View style={{
+                        height: 50,
+                        width: 180,
+                        backgroundColor: "#CD4040",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderBottomRightRadius: 20,
+                        borderTopLeftRadius: 20,
+                        borderTopRightRadius: 20,
+                        marginHorizontal: 10,
+                    }}>
+                        <Text style={{ color: "#fff", fontSize:15, fontWeight:"bold" }}>Tomato</Text>
                     </View>
-                    <View style={styles.tag}>
-                        <Text style={{ color: "#fff" }}>Juice</Text>
+                    <View
+                        style={{
+                            height: 50,
+                            width: 180,
+                            backgroundColor: "#DFA436",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            borderBottomRightRadius: 20,
+                            borderTopLeftRadius: 20,
+                            borderTopRightRadius: 20,
+                            marginHorizontal: 10,
+                        }}>
+                        <Text style={{ color: "#fff", fontSize:15, fontWeight:"bold" }}>Juice</Text>
                     </View>
 
 
@@ -133,7 +154,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         marginHorizontal: 5,
-        paddingTop: 50
+        paddingTop: 50,
+
     },
     label: {
         flexDirection: "row",
@@ -319,9 +341,10 @@ const styles = StyleSheet.create({
         top: 5
     },
     tags: {
-
-        marginTop: 190,
-        paddingVertical: 5
+        marginTop:200,
+        marginBottom:30,
+        paddingVertical: 5,
+        
     },
     tag: {
         height: 50,
