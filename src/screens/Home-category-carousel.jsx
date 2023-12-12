@@ -26,8 +26,7 @@ export default function HomeCategorycarousel() {
                     // onPress={() => nav.navigate('Details',{
                     //     main:item
                     // })}
-
-                    
+    
                     >
                         <View
                          style={{
@@ -49,17 +48,12 @@ export default function HomeCategorycarousel() {
                         </View>
                         
 
-
                         <View style={{ paddingHorizontal: 10, gap:5 }}>
                             <Text style={{ fontSize: 17, fontWeight: 600, color: "#008000" }}>
                                 {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
 
                             </Text>
- 
                         </View>
-
-                        
-
 
                     </TouchableOpacity>
                 )} />

@@ -5,28 +5,29 @@ import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import DropBox from './DropBox';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { myColors } from '../utils/Mycolors';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../Redux/CartSlice';
 
 
 
 export default function Details({ navigation, route }) {
+    const storeData = useSelector((state) => state.CartSlice);
     const dispatch = useDispatch();
     const productData = route.params.main;
     const { name, price, pieces, img } = productData;
-    
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor='white' />
             <View>
                 <Image
-                resizeMode="contain"
+                    resizeMode="contain"
                     style={{
                         height: 300,
                         borderBottomRightRadius: 15,
                         borderBottomLeftRadius: 15
                     }}
-                    source={{ uri:img }} />
+                    source={{ uri: img }} />
             </View>
 
             <View style={{
@@ -70,21 +71,43 @@ export default function Details({ navigation, route }) {
                     height: 100,
                     justifyContent: "flex-end"
                 }}>
-                    <TouchableOpacity
-                    onPress={() => {
-                        dispatch(addToCart(productData));
-                        navigation.navigate('Cart')
-                    }}
-                        activeOpacity={0.8}
-                        style={{
-                            backgroundColor: myColors.primary,
-                            borderRadius: 15,
-                            height: 70,
-                            justifyContent: "center",
-                            alignItems: "center"
-                        }}>
-                        <Text style={{ color: "#fff", fontSize: 18, fontWeight: "700" }}>Add to Cart</Text>
-                    </TouchableOpacity>
+
+                    {
+                        storeData.some((value) => value.name == productData.name) ? (
+                            <TouchableOpacity
+                            disabled={true}
+                            activeOpacity={0.8}
+                            style={{
+                                backgroundColor: "grey",
+                                borderRadius: 15,
+                                height: 70,
+                                justifyContent: "center",
+                                alignItems: "center"
+                            }}>
+                            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "700" }}>Added to Cart</Text>
+                        </TouchableOpacity>  
+                        ) : (
+                            <TouchableOpacity
+                            onPress={() => {
+                                dispatch(addToCart(productData));
+                                navigation.navigate('CartPage')
+                            }}
+                            activeOpacity={0.8}
+                            style={{
+                                backgroundColor: myColors.primary,
+                                borderRadius: 15,
+                                height: 70,
+                                justifyContent: "center",
+                                alignItems: "center"
+                            }}>
+                            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "700" }}>Add to Cart</Text>
+                        </TouchableOpacity> 
+                        )
+                           
+                    }
+
+
+
 
                 </View>
 

@@ -5,7 +5,7 @@ import { recommended } from '../utils/Data';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../../Redux/CartSlice';
+import { addToCart, removeFromCart } from '../../Redux/CartSlice';
 
 
 
@@ -56,7 +56,7 @@ export default function HomeRecommendedcarousel() {
                                     name="minus-circle"
                                      size={30} color="#008000" 
                                      onPress={() => {
-                                        dispatch(addToCart(item));
+                                        dispatch(removeFromCart(item));
                                      }}
                                      />
                                 ) :

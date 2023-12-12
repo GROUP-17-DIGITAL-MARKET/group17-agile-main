@@ -25,6 +25,27 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8c91b6be-4b3f-4eb4-8880-da9d1214d123"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/8c91b6be-4b3f-4eb4-8880-da9d1214d123"
+    },
+    "expo": {
+      "plugins": [
+        [
+          "expo-location",
+          {
+            "locationAlwaysAndWhenInUsePermission": "Allow $(GROCERY_HUB) to use your location."
+          }
+        ]
+      ]
     }
   }
 }

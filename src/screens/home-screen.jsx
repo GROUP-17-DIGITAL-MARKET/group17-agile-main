@@ -5,16 +5,12 @@ import { responsiveHeight } from 'react-native-responsive-dimensions';
 import { myColors } from '../utils/Mycolors';
 
 const entryImage = require('../../assets/discountbannerimage.png');
-const Fruits = require('../../assets/Fruits.png');
-
 const homemarketimage = require('../../assets/dome.png');
 
 import HomeRecommendedcarousel from './Home-recomended-carousel';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import HomeCategorycarousel from './Home-category-carousel';
-
-
 
 
 export default function HomeScreen({ navigation }) {
@@ -64,7 +60,7 @@ export default function HomeScreen({ navigation }) {
                 <View style={styles.label}>
                     <Text style={{ color: "#808080", fontSize: 19, fontWeight: 600 }}>Catergories</Text>
                     <Text
-                        onPress={() => navigation.navigate('Category')}
+                        onPress={() => navigation.navigate('CategoryScreen')}
                         style={{ color: myColors.primary, fontWeight: "bold", fontSize: 16 }}
                     >
                         See all
