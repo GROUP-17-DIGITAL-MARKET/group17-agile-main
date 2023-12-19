@@ -19,41 +19,15 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const background = require('../../assets/profilebackground.png');
 
 
-const ProfileScreen = ({navigation}) => {
+const ShopperProfileScreen = ({navigation}) => {
   const  nav=useNavigation()
   const uid = uuid.v4()
-  // const [userData, setUserData] = useState(null);
-
-  // useEffect(() => {
-  //   // Function to fetch user data from Firestore
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const userDocRef = doc(database, 'users', uid);
-  //       const userDocSnapshot = await getDoc(userDocRef);
-
-      
-  //       if (userDocSnapshot.exists()) {
-  //         const userData = userDocSnapshot.data();
-  //         setUserData(userData);
-  //       } else {
-  //         Alert.alert("User data not found.");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //       Alert.alert("Error fetching user data.");
-  //     }
-  //   };
-
-  //   // Call the function to fetch user data when the component mounts
-  //   fetchUserData();
-  // }, []);
-
-
+  
   const handleLogout = () => {
     signOut(authentication)
       .then(() => {
         Alert.alert("Logout Successful!");
-        nav.replace('Signin')
+        nav.replace('ShopperSigninScreen')
        
       })
       .catch((error) => {
@@ -143,12 +117,7 @@ const ProfileScreen = ({navigation}) => {
             <Text style={styles.menuItemText}>Change Password</Text>
           </View>
         </TouchableRipple>
-        <TouchableRipple onPress={() => navigation.navigate('Myorders')}>
-          <View style={styles.menuItem}>
-            <MaterialCommunityIcons name="truck-fast-outline" size={25} color="#141414" />
-            <Text style={styles.menuItemText}>My Orders</Text>
-          </View>
-        </TouchableRipple>
+         
         <TouchableRipple onPress={handleLogout}>
           <View style={styles.menuItem}>
             <Icon name="share-outline" color="#141414" size={25}/>
@@ -161,7 +130,7 @@ const ProfileScreen = ({navigation}) => {
   );
 };
 
-export default ProfileScreen;
+export default ShopperProfileScreen;
 
 const styles = StyleSheet.create({
   container: {

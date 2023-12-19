@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Entypo, AntDesign, Ionicons, MaterialCommunityIcons, Zocial, FontAwesome } from '@expo/vector-icons';
+import { Entypo, AntDesign, Ionicons,  FontAwesome, Feather, MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import EntryScreen from './src/screens/entry-screen';
 import SignupScreen from './src/screens/Signup-screen';
@@ -22,7 +22,28 @@ import Checkout from './src/screens/CheckOut';
 import { Provider } from 'react-redux';
 import { Store } from './Redux/Store';
 import TrackOrder from './src/screens/Track_order_Screen';
+import UserNotification from './src/screens/User_Notification';
+import DeliveryNotification from './src/components/Notifications/Delivery';
+import NewsUpdatesNotification from './src/components/Notifications/News Updates';
+import Myorders from './src/screens/My_Orders';
+import Ordersdetails from './src/screens/Ordersdetails';
+
+
+// Vendor
+
+import ShopperEntryScreen from './src/screens/Shopper_EntryScreen';
+import ShopperSigninScreen from './src/screens/Shopper_Signin';
+import ShopperSignupScreen from './src/screens/Shopper_Signup';
+import ShopperProfileScreen from './src/screens/Shopper_profile';
+import ShopperNotAcceptingOrders from './src/screens/Shopper_not_accepting_orders';
+import ShopperEarnings from './src/screens/Shopper_earnings';
+import ShopperHistory from './src/screens/Shopper_history';
+import ShopperTracker from './src/screens/Shopper_Tracker';
+import ChatScreen from './src/screens/ChatScreen';
  
+
+
+
 
 
 
@@ -37,7 +58,7 @@ export default function App() {
     <Provider store={Store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName='Splash'
+          initialRouteName='ShopperEntryScreen'
           screenOptions={{
             headerShown: false
           }}>
@@ -58,7 +79,21 @@ export default function App() {
           <Stack.Screen name="Checkout" component={Checkout} />
           <Stack.Screen name="OderPlaced" component={OderPlaced} />
           <Stack.Screen name="TrackOrder" component={TrackOrder} />
+          <Stack.Screen name="UserNotification" component={UserNotification} />
+          <Stack.Screen name="DeliveryNotification" component={DeliveryNotification} />
+          <Stack.Screen name="NewsUpdatesNotification" component={NewsUpdatesNotification} />
+          <Stack.Screen name="Myorders" component={Myorders} />
+          <Stack.Screen name="Ordersdetails" component={Ordersdetails} />
+          <Stack.Screen name="ChatScreen" component={ChatScreen} />
 
+
+          {/* VENDOR */}
+          <Stack.Screen name="ShopperEntryScreen" component={ShopperEntryScreen} />
+          <Stack.Screen name="ShopperSigninScreen" component={ShopperSigninScreen} />
+          <Stack.Screen name="ShopperSignupScreen" component={ShopperSignupScreen} />
+          <Stack.Screen name="ShopperProfileScreen" component={ShopperBottomTabs} />
+          <Stack.Screen name="ShopperTracker" component={ShopperTracker} />
+         
         </Stack.Navigator>
       </NavigationContainer>
 
@@ -128,6 +163,80 @@ const BottomTabs = ({ navigation }) => {
     </Tab.Navigator>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const ShopperBottomTabs = ({ navigation }) => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="ShopperNotAcceptingOrders" component={ShopperNotAcceptingOrders}
+        options={{
+          headerShown: false,
+          tabBarIcon: () => (
+            <TouchableOpacity>
+              <Feather name="package" size={26} color="black"
+                onPress={() => navigation.navigate('ShopperNotAcceptingOrders')}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />  
+
+      <Tab.Screen name="ShopperEarnings" component={ShopperEarnings}
+        options={{
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarIcon: () => (
+            <FontAwesome name="money" size={26} color="black"
+              onPress={() => navigation.navigate('ShopperEarnings')}
+            />
+          ),
+        }}
+      />
+
+      <Tab.Screen name="ShopperHistory" component={ShopperHistory}
+        options={{
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarIcon: () => (
+            <TouchableOpacity >
+
+              <MaterialIcons name="menu-book" size={26} color="black"
+                onPress={() => navigation.navigate('ShopperHistory')}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+
+      <Tab.Screen name="ShopperProfileScreentab" component={ShopperProfileScreen}
+        options={{
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarIcon: () => (
+            <Ionicons name="person-circle-outline" size={24} color="#999999"
+            onPress={() => navigation.navigate('ShopperProfileScreentab')} 
+            />
+          ),
+        }}
+      />
+
+    </Tab.Navigator>
+  );
+}
+
 
 
 

@@ -213,3 +213,61 @@ export const recommended = [
     },
      
   ];
+
+  export const MyorderList = [
+    {
+      orderid: "123456",
+      date: "05 Nov",
+      img: require('../../assets/orderplaced1.png'),
+
+    },
+    {
+      orderid: "123456",
+      date: "05 Nov",
+      img: require('../../assets/orderplaced2.png'),
+
+    },
+    {
+      orderid: "123456",
+      date: "05 Nov",
+      img: require('../../assets/orderplaced3.png'),
+
+    },
+    {
+      orderid: "123456",
+      date: "05 Nov",
+      img: require('../../assets/orderplaced4.png'),
+
+    },
+    {
+      orderid: "123456",
+      date: "05 Nov",
+      img: require('../../assets/orderplaced2.png'),
+
+    },
+    {
+      orderid: "123456",
+      date: "05 Nov",
+      img: require('../../assets/orderplaced3.png'),
+
+    },
+    {
+      orderid: "123456",
+      date: "05 Nov",
+      img: require('../../assets/orderplaced2.png'),
+
+    },
+    {
+      orderid: "123456",
+      date: "05 Nov",
+      img: require('../../assets/orderplaced2.png'),
+
+    },
+    {
+      orderid: "123456",
+      date: "05 Nov",
+      img: require('../../assets/orderplaced2.png'),
+
+    },
+     
+  ];

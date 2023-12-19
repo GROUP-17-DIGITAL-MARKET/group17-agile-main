@@ -9,11 +9,12 @@ import {
   Image,
 } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
-import { AntDesign, Entypo, MaterialIcons, SimpleLineIcons  } from "@expo/vector-icons";
+import { AntDesign, Entypo, MaterialIcons, SimpleLineIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ScrollView } from "react-native-gesture-handler";
 const Shopper = require("../../assets/shopperimage.png");
 
-export default function TrackOrder() {
+export default function ShopperTracker({navigation}) {
   const accraRegion = {
     latitude: 5.6037,
     longitude: -0.187,
@@ -27,13 +28,13 @@ export default function TrackOrder() {
     <SafeAreaView style={styles.container}>
       <View>
         <TouchableOpacity
-        activeOpacity={0.8}
+          activeOpacity={0.8}
           style={styles.button}
           onPress={() => refRBSheet.current.open()}
         >
-           <SimpleLineIcons name="menu" size={24} color="black" />
+          <SimpleLineIcons name="menu" size={24} color="black" />
         </TouchableOpacity>
-        
+
         <MapView style={styles.map} initialRegion={accraRegion}>
           <Marker coordinate={accraRegion} title="Accra, Ghana" />
         </MapView>
@@ -52,7 +53,7 @@ export default function TrackOrder() {
           },
         }}
       >
-        <View style={{ gap: 15,   }}>
+        <ScrollView style={{ gap: 15, }}>
           <View style={{ flexDirection: "row", gap: 10, paddingHorizontal: 5 }}>
             <AntDesign
               name="clockcircle"
@@ -65,8 +66,8 @@ export default function TrackOrder() {
               }}
             />
             <View>
-              <Text style={{ color: "#808080" }}>Delivery Time</Text>
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>1hr</Text>
+              <Text style={{ color: "#808080" }}>Market</Text>
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>Madina</Text>
             </View>
           </View>
 
@@ -82,9 +83,28 @@ export default function TrackOrder() {
               }}
             />
             <View>
-              <Text style={{ color: "#808080" }}>Location</Text>
+              <Text style={{ color: "#808080" }}>Arriving</Text>
               <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                Number 12, Antelope street
+                1 hr
+              </Text>
+            </View>
+          </View>
+
+          <View style={{ flexDirection: "row", gap: 10, paddingHorizontal: 5 }}>
+            <AntDesign
+              name="clockcircle"
+              size={24}
+              color="#fff"
+              style={{
+                padding: 20,
+                backgroundColor: "#DE5FDE",
+                borderRadius: 5,
+              }}
+            />
+            <View>
+              <Text style={{ color: "#808080" }}>Address</Text>
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                Number 12, Antelope Street
               </Text>
             </View>
           </View>
@@ -94,12 +114,12 @@ export default function TrackOrder() {
               flexDirection: "row",
               gap: 10,
               alignItems: "center",
-              justifyContent:"space-between",
+              justifyContent: "space-between",
               paddingHorizontal: 5,
-              
+
             }}
           >
-            <View style={{ flexDirection: "row", gap:10 }}>
+            <View style={{ flexDirection: "row", gap: 10 }}>
               <Image source={Shopper} style={styles.shopperimage} />
 
               <View>
@@ -110,7 +130,7 @@ export default function TrackOrder() {
               </View>
             </View>
 
-            <View style={{flexDirection:"row", gap:20}}>
+            <View style={{ flexDirection: "row", gap: 20 }}>
               <Entypo
                 name="phone"
                 size={24}
@@ -131,10 +151,11 @@ export default function TrackOrder() {
                   borderRadius: 10,
                 }}
                 onPress={() => navigation.navigate('ChatScreen')}
+                
               />
             </View>
           </View>
-        </View>
+        </ScrollView>
       </RBSheet>
     </SafeAreaView>
   );

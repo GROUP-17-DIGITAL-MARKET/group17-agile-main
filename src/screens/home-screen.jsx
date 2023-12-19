@@ -25,7 +25,7 @@ export default function HomeScreen({ navigation }) {
                         <Text onPress={() => nav.navigate('ProfileScreen')} style={styles.name}>Hi Selassi</Text>
                     </TouchableOpacity>
 
-                    <Ionicons name="notifications" size={28} color="black" style={styles.notificationIcon} onPress={() => nav.navigate('Changepassword')} />
+                    <Ionicons name="notifications" size={28} color="black" style={styles.notificationIcon} onPress={() => nav.navigate('UserNotification')} />
                 </View>
 
                 <View style={styles.seachAndFilter}>
@@ -108,7 +108,7 @@ export default function HomeScreen({ navigation }) {
 
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.tags}>
                     <View style={styles.tag}>
-                        <Text style={{ color: "#fff", fontSize:15, fontWeight:"bold" }}>Fruits</Text>
+                        <Text style={{ color: "#fff", fontSize: 15, fontWeight: "bold" }}>Fruits</Text>
                     </View>
                     <View style={{
                         height: 50,
@@ -121,7 +121,7 @@ export default function HomeScreen({ navigation }) {
                         borderTopRightRadius: 20,
                         marginHorizontal: 10,
                     }}>
-                        <Text style={{ color: "#fff", fontSize:15, fontWeight:"bold" }}>Tomato</Text>
+                        <Text style={{ color: "#fff", fontSize: 15, fontWeight: "bold" }}>Tomato</Text>
                     </View>
                     <View
                         style={{
@@ -135,7 +135,7 @@ export default function HomeScreen({ navigation }) {
                             borderTopRightRadius: 20,
                             marginHorizontal: 10,
                         }}>
-                        <Text style={{ color: "#fff", fontSize:15, fontWeight:"bold" }}>Juice</Text>
+                        <Text style={{ color: "#fff", fontSize: 15, fontWeight: "bold" }}>Juice</Text>
                     </View>
 
 
@@ -341,10 +341,10 @@ const styles = StyleSheet.create({
         top: 5
     },
     tags: {
-        marginTop:200,
-        marginBottom:30,
+        marginTop: 200,
+        marginBottom: 30,
         paddingVertical: 5,
-        
+
     },
     tag: {
         height: 50,
