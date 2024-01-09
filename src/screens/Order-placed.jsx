@@ -38,7 +38,7 @@ const Orderplaced = ({navigation}) => {
             <TouchableOpacity
                 onPress={() => {
                     
-                    navigation.navigate('HomeScreen')
+                    navigation.navigate('Home')
                 }}
                 activeOpacity={0.8}
                 style={{

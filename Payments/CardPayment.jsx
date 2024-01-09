@@ -2,9 +2,17 @@
 import React, { useRef } from 'react';
 import { Paystack, paystackProps } from 'react-native-paystack-webview';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 
 export default function Cardpayment({navigation}) {
+  const storeData = useSelector((state) => state.CartSlice);
   const paystackWebViewRef = useRef(paystackProps.PayStackRef);
+
+
+  let amount = 0;
+    storeData.forEach(element => {
+      amount += element.price * element.quantity;
+    });
 
   return (
     <View style={styles.container}>
@@ -16,7 +24,7 @@ export default function Cardpayment({navigation}) {
         channels={["card"]}
         billingName="Alfred"
         currency='GHS'
-        amount={2500}
+        amount={amount}
         onCancel={(e) => {
           console.log(e)
         }}

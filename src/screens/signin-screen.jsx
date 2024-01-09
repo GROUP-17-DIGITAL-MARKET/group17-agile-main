@@ -1,19 +1,20 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, ScrollView, TextInput, SafeAreaView, Alert, Modal, } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert, KeyboardAvoidingView, ToastAndroid } from 'react-native';
 import { EvilIcons, AntDesign, FontAwesome, Ionicons, } from '@expo/vector-icons';
 import { myColors } from '../utils/Mycolors';
-import { KeyboardAvoidingView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { authentication } from '../../config/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-
-
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useToast } from "react-native-toast-notifications";
 
 
 export default function SigninScreen({ navigation }) {
+    const toast = useToast();
+
     const nav = useNavigation()
     const [isVisible, setisVisible] = useState(false);
     const [loginCredencials, setloginCredencials] = useState(
@@ -30,7 +31,14 @@ export default function SigninScreen({ navigation }) {
 
         signInWithEmailAndPassword(authentication, email, password)
             .then((val) => {
-                Alert.alert("Login Successful!")
+                 
+                toast.show("Login Successful!", {
+                    type: "success",
+                    placement: "top",
+                    duration: 3000,
+                    offset: 30,
+                    animationType: "slide-in",
+                  });
                 nav.replace('HomeScreen')
             }).catch((err) => {
                 Alert.alert(err.message)
@@ -39,20 +47,20 @@ export default function SigninScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar style='white' />
+            <StatusBar style='#fff' backgroundColor='#53E559' />
 
             <View style={styles.curve}>
-                <AntDesign onPress={() => navigation.navigate('Entry')} name="arrowleft" size={30} color="black" style={{ color: myColors.secondary, marginLeft: 10, marginTop: 20 }} />
+                <AntDesign onPress={() => navigation.navigate('Entry')} name="arrowleft" size={26} color="black" style={{ color: myColors.secondary, marginLeft: 10, marginTop: 10 }} />
             </View>
 
             <View style={{ justifyContent: "center", flexDirection: "row" }}>
-                <Text style={{ marginTop: 50, fontWeight: "bold", color: myColors.primary, fontSize: 25 }}>Sign in</Text>
+                <Text style={{ marginTop: 40, fontWeight: "bold", color: myColors.primary, fontSize: 25 }}>Sign in</Text>
             </View>
 
 
-            <View style={styles.inputcontainer}>
+            <KeyboardAvoidingView style={styles.inputcontainer}>
 
-                <KeyboardAvoidingView style={styles.inputView}>
+                <View style={styles.inputView}>
                     <Ionicons name="mail" size={30} color="black" style={{ color: myColors.fifth, marginTop: 0, marginLeft: 5, position: "absolute", zIndex: 2 }} />
                     <TextInput placeholder='Email'
                         keyboardType='email-address'
@@ -63,9 +71,9 @@ export default function SigninScreen({ navigation }) {
                             setloginCredencials({ ...loginCredencials, email: value })
                         }}
                     />
-                </KeyboardAvoidingView>
+                </View>
 
-                <KeyboardAvoidingView style={styles.inputView}>
+                <View style={styles.inputView}>
                     <FontAwesome name="lock" size={30} color="black" style={{ color: myColors.fifth, marginTop: 0, marginLeft: 5, position: "absolute", zIndex: 2 }} />
                     <TextInput
                         secureTextEntry={isVisible}
@@ -83,10 +91,10 @@ export default function SigninScreen({ navigation }) {
                         }}
                         size={30} color="black" style={{ color: myColors.fifth, marginTop: 0, marginLeft: 310, position: "absolute", zIndex: 2 }} />
 
-                </KeyboardAvoidingView>
+                </View>
 
 
-            </View>
+            </KeyboardAvoidingView>
 
 
 
@@ -104,7 +112,7 @@ export default function SigninScreen({ navigation }) {
                 </Text>
             </View>
 
-            <View style={{ height: 70, top: 5, marginHorizontal: 20 }}>
+            <View style={{ height: 70, top: 5, marginHorizontal: 20,flex:0.9 }}>
                 <TouchableOpacity
                     activeOpacity={0.8}
                     style={styles.signupButtontext} onPress={loginUser} >
@@ -122,7 +130,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        marginTop: 40
+         
 
     },
 
@@ -143,8 +151,10 @@ const styles = StyleSheet.create({
     },
 
     inputcontainer: {
-        marginTop: 50,
-        alignItems: "center"
+        marginTop: 40,
+        alignItems: "center",
+        paddingVertical:10
+        
 
     },
     signupButtontext: {

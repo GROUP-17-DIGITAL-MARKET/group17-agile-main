@@ -30,16 +30,19 @@ export default function HomeRecommendedcarousel() {
                     })}
 
                      style={{
-                        height: responsiveHeight(23),
+                        height: responsiveHeight(25),
                         borderWidth: 2,
                         borderColor: "#e3e3e3",
                         width: responsiveWidth(45),
                         marginRight: 20,
-                        borderRadius: 15
+                        borderRadius: 15,
+                        
+                         
+                        
                     }}
                     >
                         <Image
-                            style={{ height: 125, resizeMode: "contain" }}
+                            style={{ height: 125, resizeMode: "contain",  alignSelf:"center" }}
                             source={ item.img } />
                         <View style={{ paddingHorizontal: 10, gap:5 }}>
                             <Text style={{ fontSize: 17, fontWeight: 600, color: "#008000" }}>
@@ -47,7 +50,7 @@ export default function HomeRecommendedcarousel() {
 
                             </Text>
  
-                            <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
+                            <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-between", gap:20}}>
                               <Text style={{color:"#808080"}}>{item.pieces}</Text>
 
                               {

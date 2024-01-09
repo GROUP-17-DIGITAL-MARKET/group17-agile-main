@@ -34,6 +34,7 @@ export default function FruitsAndVegetables() {
 
   return (
     <View style={styles.container}>
+      <Text style={{fontSize:24, color:"#141414", marginVertical:10, fontWeight:"bold"}}>Fruits And Vegetables</Text>
       <View style={styles.filterContainer}>
         <Picker
           selectedValue={filter}

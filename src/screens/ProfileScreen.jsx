@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {View, SafeAreaView, StyleSheet, Alert, ImageBackground} from 'react-native';
+import {View,StyleSheet, Alert, ImageBackground, Image} from 'react-native';
 import {
   Avatar,
   Title,
@@ -7,53 +7,104 @@ import {
   Text,
   TouchableRipple,
 } from 'react-native-paper';
-import { authentication, database } from '../../config/firebase';
 import { signOut } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons,Ionicons, MaterialCommunityIcons, Fontisto , FontAwesome5 } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { doc, getDoc } from 'firebase/firestore';
 import uuid from 'react-native-uuid';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
 const background = require('../../assets/profilebackground.png');
+const Profileimage = require('../../assets/userImage.png');
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getDoc, doc, getFirestore } from 'firebase/firestore';
+import * as Location from 'expo-location';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useToast } from "react-native-toast-notifications";
 
+const authentication = getAuth();
+const database = getFirestore();
 
 const ProfileScreen = ({navigation}) => {
+  const toast = useToast();
+
   const  nav=useNavigation()
-  const uid = uuid.v4()
-  // const [userData, setUserData] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
-  // useEffect(() => {
-  //   // Function to fetch user data from Firestore
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const userDocRef = doc(database, 'users', uid);
-  //       const userDocSnapshot = await getDoc(userDocRef);
 
-      
-  //       if (userDocSnapshot.exists()) {
-  //         const userData = userDocSnapshot.data();
-  //         setUserData(userData);
-  //       } else {
-  //         Alert.alert("User data not found.");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //       Alert.alert("Error fetching user data.");
-  //     }
-  //   };
+  const [userData, setUserData] = useState({
+    username: '',
+    email: '',
+  });
 
-  //   // Call the function to fetch user data when the component mounts
-  //   fetchUserData();
-  // }, []);
+  
+  useEffect(() => {
+      (async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied');
+          return;
+        }
+  
+        let currentLocation = await Location.getCurrentPositionAsync({});
+        let { latitude, longitude } = currentLocation.coords;
+  
+        try {
+          let address = await Location.reverseGeocodeAsync({ latitude, longitude });
+          setLocation(address[0]);  
+        } catch (error) {
+          setErrorMsg('Error fetching address');
+        }
+      })();
+    }, []);
+  
+    let text = 'Waiting...';
+    if (errorMsg) {
+      text = errorMsg;
+    } else if (location) {
+      const { street, city, region, country } = location;
+  
+       
+      text = `Location: ${street}, ${city}`;
+    }
+
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(authentication, (user) => {
+      if (user) {
+        const userId = user.uid;
+        const userDocRef = doc(database, 'users', userId);
+
+        getDoc(userDocRef)
+          .then((docSnapshot) => {
+            if (docSnapshot.exists()) {
+              const userDataFromFirestore = docSnapshot.data();
+              setUserData({
+                username: userDataFromFirestore.username,
+                email: user.email,
+              });
+            }
+          })
+          .catch((error) => {
+            console.error('Error fetching user data:', error);
+          });
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
 
   const handleLogout = () => {
     signOut(authentication)
       .then(() => {
-        Alert.alert("Logout Successful!");
-        nav.replace('Signin')
+        toast.show("Logout Successful!", {
+          type: "success",
+          placement: "top",
+          duration: 3000,
+          offset: 30,
+          animationType: "slide-in",
+        });
+        nav.replace('UserShopperEntry')
        
       })
       .catch((error) => {
@@ -69,18 +120,16 @@ const ProfileScreen = ({navigation}) => {
 
      
         <View style={{flexDirection: 'row', marginTop: 15}}>
-          <Avatar.Image 
-            source={{
-              uri: 'https://api.adorable.io/avatars/80/abott@adorable.png',
-            }}
-            size={80}
+          <Image 
+            source={Profileimage}
+            style={{width:70, height:70, borderRadius:99}}
           />
           <View style={{marginLeft: 20}}>
             <Title style={[styles.title, {
               marginTop:15,
               marginBottom: 5,
-            }]}>Selasi</Title>
-            <Caption style={styles.caption}>Selasi@gmail.com</Caption>
+            }]}>{userData.username}</Title>
+            <Caption style={styles.caption}>{userData.email}</Caption>
           </View>
         </View>
        
@@ -89,7 +138,7 @@ const ProfileScreen = ({navigation}) => {
       <View style={styles.userInfoSection}>
         <View style={styles.row}>
           <Icon name="map-marker-radius" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>Accra Ghana</Text>
+          <Text style={{color:"#777777", marginLeft: 20}}>{text}</Text>
         </View>
         <View style={styles.row}>
           <Icon name="phone" color="#777777" size={20}/>
@@ -131,12 +180,7 @@ const ProfileScreen = ({navigation}) => {
           </View>
         </TouchableRipple>
          
-        <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-            <Ionicons name="settings-sharp" size={25} color="#141414" />
-            <Text style={styles.menuItemText}>Settings</Text>
-          </View>
-        </TouchableRipple>
+        
         <TouchableRipple onPress={() => navigation.navigate('Changepassword')}>
           <View style={styles.menuItem}>
           <FontAwesome5 name="exchange-alt" size={25} color="#141414" />
@@ -166,11 +210,9 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop:40
   },
   background: {
     flex: 1,
-    // justifyContent: 'center',
   },
   userInfoSection: {
     paddingHorizontal: 30,

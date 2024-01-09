@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, FlatList }
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { useNavigation } from '@react-navigation/native';
 import { MarketsList } from '../utils/Data';
+import { SafeAreaView } from 'react-native-safe-area-context';
  
 
 
@@ -10,7 +11,7 @@ import { MarketsList } from '../utils/Data';
 export default function Markets() {
     const  nav=useNavigation()
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <FlatList 
             showsVerticalScrollIndicator={false}
                 data={MarketsList}
@@ -20,7 +21,7 @@ export default function Markets() {
                     activeOpacity={
                         0.8
                     }    
-                    onPress={() => nav.navigate('Category')}
+                    onPress={() => nav.navigate('CategoryScreen')}
 
                      style={{
                         height: responsiveHeight(23),
@@ -40,7 +41,7 @@ export default function Markets() {
                     
                      
                 )} />
-        </View>
+        </SafeAreaView>
     );
 }
 

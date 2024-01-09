@@ -6,7 +6,6 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView,
   form,
 } from "react-native";
 import {
@@ -24,6 +23,7 @@ import {
 import { FlatList } from "react-native-gesture-handler";
 import { myColors } from "../utils/Mycolors";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 const checkoutline = require("../../assets/checkoutline.png");
 
 export default function Cart({ navigation }) {
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F2F2F2",
     paddingHorizontal: 10,
-    paddingTop: 60,
+    
     gap: 15,
   },
   header: {

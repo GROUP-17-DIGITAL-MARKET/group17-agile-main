@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity,  Alert } from 'react-native';
 import { authentication, firebaseReauthenticateWithCredential, firebaseUpdatePassword } from '../../config/firebase';
 import { myColors } from '../utils/Mycolors';
 import { EmailAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { signOut } from 'firebase/auth';
-
-export default function ChangePassword() {
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons, Feather} from '@expo/vector-icons';
+export default function ChangePassword({navigation}) {
   const nav = useNavigation()
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -49,12 +50,23 @@ export default function ChangePassword() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
+                paddingHorizontal: 20,
+                alignItems: "center"
+            }}>
+                <Ionicons onPress={() => navigation.goBack()} name="chevron-back" size={28} color="black" />
+               
+            </View>
       <Text style={{fontSize:30, fontWeight:"bold"}}>Change Password</Text>
       <View>
         <TextInput
           style={styles.textInput}
           placeholder="Current Password"
           secureTextEntry
+          maxLength={8}
           value={currentPassword}
           onChangeText={setCurrentPassword}
         />
@@ -65,6 +77,7 @@ export default function ChangePassword() {
           placeholder="New Password"
           secureTextEntry
           value={newPassword}
+          maxLength={8}
           onChangeText={setNewPassword}
         />
       </View>
@@ -84,9 +97,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems:"center",
-    justifyContent:"center",
     gap:30,
-    paddingTop:60
+     
   },
   textInput: {
     height: 50,
@@ -97,8 +109,8 @@ const styles = StyleSheet.create({
   },
   changePasswordButton: {
     backgroundColor: myColors.primary,
-    height: 70,
-    width:300,
+    height: 60,
+    width:291,
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",

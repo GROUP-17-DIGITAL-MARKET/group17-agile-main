@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, FlatList, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Button, FlatList, Text, StyleSheet, SafeAreaView, ImageBackground, TouchableOpacity } from 'react-native';
+const background = require('../../assets/profilebackground.png');
 
-const ChatScreen = () => {
+import { Ionicons } from '@expo/vector-icons';
+
+
+const ChatScreen = ({navigation}) => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
 
@@ -16,45 +20,68 @@ const ChatScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.chatContainer}>
-        <FlatList
-          data={messages}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.messageContainer}>
-              <Text>{item.text}</Text>
-            </View>
-          )}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Type your message"
-          value={inputText}
-          onChangeText={(text) => setInputText(text)}
-        />
-        <Button title="Send" onPress={handleSendMessage} />
-      </View>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ImageBackground source={background} style={styles.background} >
+        <View style={{
+          flexDirection: "row",
+          width: "100%",
+          gap:40,
+          alignItems: "center",
+           
+        }}>
+          <Ionicons onPress={() => navigation.goBack()} name="chevron-back" size={28} color="black" />
+          <Text style={{ fontSize: 25, fontWeight: "bold", color: "#000000", textAlign: "center", marginVertical: 20 }} >Chat</Text>
+        </View>
+       
+
+        
+        <View style={styles.chatContainer}>
+
+          <FlatList
+            data={messages}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+
+
+              <View style={styles.messageContainer}>
+                <Text  >{item.text}</Text>
+              </View>
+
+            )}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Type message ...."
+            value={inputText}
+            onChangeText={(text) => setInputText(text)}
+          />
+          <TouchableOpacity onPress={handleSendMessage}>
+            <Ionicons name="chevron-forward" size={50} color="#53E559" />
+          </TouchableOpacity>
+
+        </View>
+      </ImageBackground>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-end',
+    paddingTop: 50
   },
   chatContainer: {
     flex: 1,
     padding: 10,
   },
   messageContainer: {
-    backgroundColor: '#EFEFEF',
+    backgroundColor: '#53E559',
     borderRadius: 10,
     padding: 10,
-    marginBottom: 5,
+    marginBottom: 20,
+    width: 200
   },
   inputContainer: {
     flexDirection: 'row',
@@ -65,12 +92,16 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
+    height: 53,
+    backgroundColor: "#FFFFFF",
     marginRight: 10,
     paddingVertical: 5,
     paddingHorizontal: 10,
-    borderColor: '#CCCCCC',
-    borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 20,
+  },
+  background: {
+    flex: 1,
+    // justifyContent: 'center',
   },
 });
 

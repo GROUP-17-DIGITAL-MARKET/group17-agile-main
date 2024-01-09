@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {View, SafeAreaView, StyleSheet, Alert, ImageBackground} from 'react-native';
+import {View,  StyleSheet, Alert, ImageBackground} from 'react-native';
 import {
   Avatar,
   Title,
@@ -14,20 +14,28 @@ import { MaterialIcons,Ionicons, MaterialCommunityIcons, Fontisto , FontAwesome5
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { doc, getDoc } from 'firebase/firestore';
 import uuid from 'react-native-uuid';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useToast } from "react-native-toast-notifications";
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const background = require('../../assets/profilebackground.png');
 
 
 const ShopperProfileScreen = ({navigation}) => {
+  const toast = useToast();
   const  nav=useNavigation()
   const uid = uuid.v4()
   
   const handleLogout = () => {
     signOut(authentication)
       .then(() => {
-        Alert.alert("Logout Successful!");
-        nav.replace('ShopperSigninScreen')
+        toast.show("Logout Successful!", {
+          type: "success",
+          placement: "top",
+          duration: 3000,
+          offset: 30,
+          animationType: "slide-in",
+        });
+        nav.replace('UserShopperEntry')
        
       })
       .catch((error) => {
@@ -77,7 +85,7 @@ const ShopperProfileScreen = ({navigation}) => {
 
       <View style={styles.infoBoxWrapper}>
           <View style={styles.infoBox } >
-            <MaterialCommunityIcons name="truck-fast-outline" size={24} color="black" onPress={() => navigation.navigate('Myorders')} />
+            <MaterialCommunityIcons name="truck-fast-outline" size={24} color="black" onPress={() => navigation.navigate('ShopperNotAcceptingOrders')} />
             <Caption>All Orders</Caption>
           </View>
           <View style={styles.infoBox}>
@@ -105,12 +113,7 @@ const ShopperProfileScreen = ({navigation}) => {
           </View>
         </TouchableRipple>
          
-        <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-            <Ionicons name="settings-sharp" size={25} color="#141414" />
-            <Text style={styles.menuItemText}>Settings</Text>
-          </View>
-        </TouchableRipple>
+         
         <TouchableRipple onPress={() => navigation.navigate('Changepassword')}>
           <View style={styles.menuItem}>
           <FontAwesome5 name="exchange-alt" size={25} color="#141414" />
@@ -135,7 +138,6 @@ export default ShopperProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop:40
   },
   background: {
     flex: 1,

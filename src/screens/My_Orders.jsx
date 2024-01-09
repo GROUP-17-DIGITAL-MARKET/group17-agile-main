@@ -23,7 +23,7 @@ export default function Myorders({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ flexDirection: "row", marginVertical: 20 }}>
-        <AntDesign name="arrowleft" size={34} color="#53E559" />
+        <AntDesign name="arrowleft" size={34} color="#53E559" onPress={() => navigation.goBack()}/>
         <View
           style={{
             width: 300,

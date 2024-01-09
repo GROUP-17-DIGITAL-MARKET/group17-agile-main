@@ -7,21 +7,21 @@ export const recommended = [
     },
     {
       name: "Onion",
-      pieces: "1kg/₵10",
+      pieces: "1kg/₵2",
       price: 10.00,
       img: require('../../assets/Onion.png'),
     },
     {
       name: "orange",
-      pieces: "1kg/₵10",
+      pieces: "1kg/₵5",
       price: 10.00,
-      img: require('../../assets/FruitsAndVegetables/FaV.png'),
+      img: require('../../assets/orange.png'),
     },
     {
-      name: "pine apple",
+      name: "Bannana",
       pieces: "1kg/₵10",
       price: 10.00,
-      img: require('../../assets/FruitsAndVegetables/FaV.png'),
+      img: require('../../assets/bannana.png'),
     },
   ];
 
@@ -114,6 +114,42 @@ export const recommended = [
       price: 10.00,
       img: require('../../assets/FruitsAndVegetables/FaV6.png'),
     },
+    {
+      name: "Banana",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/FruitsAndVegetables/FaV7.png'),
+    },
+    {
+      name: "Lettuce",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/FruitsAndVegetables/FaV8.png'),
+    },
+    {
+      name: "Pomegranate",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/FruitsAndVegetables/FaV9.png'),
+    },
+    {
+      name: "Bell Pepper",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/FruitsAndVegetables/FaV10.png'),
+    },
+    {
+      name: "Coconut",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/FruitsAndVegetables/FaV11.png'),
+    },
+    {
+      name: "Broccoli",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/FruitsAndVegetables/FaV12.png'),
+    },
   ];
 
 
@@ -156,6 +192,42 @@ export const recommended = [
       price: 10.00,
       img: require('../../assets/Spices/spice5.png'),
     },
+    {
+      name: "Cinnamon",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Spices/spice6.png'),
+    },
+    {
+      name: "Peppercorn",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Spices/spice7.png'),
+    },
+    {
+      name: "Saffron",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Spices/spice8.png'),
+    },
+    {
+      name: "Basil",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Spices/spice9.png'),
+    },
+    {
+      name: "Oregano",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Spices/spice10.png'),
+    },
+    {
+      name: "Cumin",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Spices/spice11.png'),
+    },
   ];
 
 
@@ -196,6 +268,42 @@ export const recommended = [
       pieces: "1kg/₵10",
       price: 10.00,
       img: require('../../assets/Cereals/cereal5.png'),
+    },
+    {
+      name: "Barley",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Cereals/cereal6.png'),
+    },
+    {
+      name: "Soy Beans",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Cereals/cereal7.png'),
+    },
+    {
+      name: "Canary Seed",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Cereals/cereal8.png'),
+    },
+    {
+      name: "Buckwheat",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Cereals/cereal9.png'),
+    },
+    {
+      name: "Quinoa",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Cereals/cereal10.png'),
+    },
+    {
+      name: "Flaxseed",
+      pieces: "1kg/₵10",
+      price: 10.00,
+      img: require('../../assets/Cereals/cereal11.png'),
     },
   ];
 

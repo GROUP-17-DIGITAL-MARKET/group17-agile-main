@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
-import { EvilIcons, AntDesign, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { StyleSheet, Text, View,} from 'react-native';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import CustomTopTabNavigator from '../../Payments/MainRecommendationList';
 
 import * as Location from 'expo-location';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Checkout({ navigation }) {
     const [location, setLocation] = useState(null);
@@ -43,10 +44,20 @@ export default function Checkout({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
+             <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
+                alignItems: "center"
+            }}>
+                <Ionicons onPress={() => navigation.goBack()} name="chevron-back" size={28} color="black" />
+               
+            </View>
+
+
             <View style={{
                 height: 150,
                 backgroundColor: "#B7FFBA",
-                marginTop: 55,
                 flexDirection: "row",
                 borderRadius: 20,
                 borderColor: "#53E559",

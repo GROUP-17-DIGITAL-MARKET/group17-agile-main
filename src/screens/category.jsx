@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, Text, View, Image, TouchableWithoutFeedback,  } from 'react-native';
 const Fruits = require('../../assets/Fruits.png');
-
+import { Ionicons, Feather} from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Grains = require('../../assets/grains.png');
 const Meat = require('../../assets/Meat.png');
@@ -18,80 +18,93 @@ const Oil = require('../../assets/Oil.png');
 export default function Category({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
-            <View  style={styles.categories}>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate('FruitsAndVegetables')}>
+
+            <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
+                paddingHorizontal: 20,
+                alignItems: "center"
+            }}>
+                <Ionicons onPress={() => navigation.goBack()} name="chevron-back" size={28} color="black" />
+               
+            </View>
+
+
+            <View style={styles.categories}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('FruitsAndVegetables')}>
                     <View style={styles.categoryrapper}>
                         <View style={styles.category}>
                             <Image source={Fruits} style={styles.categoryimage} />
                         </View>
                         <Text style={styles.categorytext}>Fruits</Text>
                     </View>
-                    </TouchableWithoutFeedback>
+                </TouchableWithoutFeedback>
 
-                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Spices')}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('Spices')}>
                     <View style={styles.categoryrapper}>
                         <View style={styles.category}>
                             <Image source={Spice} style={styles.categoryimage} />
                         </View>
                         <Text style={styles.categorytext}>Spices</Text>
                     </View>
-                    </TouchableWithoutFeedback>
+                </TouchableWithoutFeedback>
 
-                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Cereals')}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('Cereals')}>
                     <View style={styles.categoryrapper}>
                         <View style={styles.category}>
                             <Image source={Cereals} style={styles.categoryimage} />
                         </View>
                         <Text style={styles.categorytext}>Cereals</Text>
-                    </View>  
-                    </TouchableWithoutFeedback>
-                </View>
+                    </View>
+                </TouchableWithoutFeedback>
+            </View>
 
 
 
-                
-                <View  style={styles.categories}>
-                    <View style={styles.categoryrapper}>
-                        <View style={styles.category}>
-                            <Image source={Beverages} style={styles.categoryimage} />
-                        </View>
-                        <Text style={styles.categorytext}>Beverages</Text>
+
+            <View style={styles.categories}>
+                <View style={styles.categoryrapper}>
+                    <View style={styles.category}>
+                        <Image source={Beverages} style={styles.categoryimage} />
                     </View>
-                    <View style={styles.categoryrapper}>
-                        <View style={styles.category}>
-                            <Image source={Dairy} style={styles.categoryimage} />
-                        </View>
-                        <Text style={styles.categorytext}>Dairy</Text>
-                    </View>
-                    <View style={styles.categoryrapper}>
-                        <View style={styles.category}>
-                            <Image source={Oil} style={styles.categoryimage} />
-                        </View>
-                        <Text style={styles.categorytext}>Oil</Text>
-                    </View>
-                   
+                    <Text style={styles.categorytext}>Beverages</Text>
                 </View>
-                <View  style={styles.categories}>
-                    <View style={styles.categoryrapper}>
-                        <View style={styles.category}>
-                            <Image source={Fish} style={styles.categoryimage} />
-                        </View>
-                        <Text style={styles.categorytext}>Fish</Text>
+                <View style={styles.categoryrapper}>
+                    <View style={styles.category}>
+                        <Image source={Dairy} style={styles.categoryimage} />
                     </View>
-                    <View style={styles.categoryrapper}>
-                        <View style={styles.category}>
-                            <Image source={Meat} style={styles.categoryimage} />
-                        </View>
-                        <Text style={styles.categorytext}>Meat</Text>
-                    </View>
-                    <View style={styles.categoryrapper}>
-                        <View style={styles.category}>
-                            <Image source={Grains} style={styles.categoryimage} />
-                        </View>
-                        <Text style={styles.categorytext}>Grains</Text>
-                    </View>
-                   
+                    <Text style={styles.categorytext}>Dairy</Text>
                 </View>
+                <View style={styles.categoryrapper}>
+                    <View style={styles.category}>
+                        <Image source={Oil} style={styles.categoryimage} />
+                    </View>
+                    <Text style={styles.categorytext}>Oil</Text>
+                </View>
+
+            </View>
+            <View style={styles.categories}>
+                <View style={styles.categoryrapper}>
+                    <View style={styles.category}>
+                        <Image source={Fish} style={styles.categoryimage} />
+                    </View>
+                    <Text style={styles.categorytext}>Fish</Text>
+                </View>
+                <View style={styles.categoryrapper}>
+                    <View style={styles.category}>
+                        <Image source={Meat} style={styles.categoryimage} />
+                    </View>
+                    <Text style={styles.categorytext}>Meat</Text>
+                </View>
+                <View style={styles.categoryrapper}>
+                    <View style={styles.category}>
+                        <Image source={Grains} style={styles.categoryimage} />
+                    </View>
+                    <Text style={styles.categorytext}>Grains</Text>
+                </View>
+
+            </View>
         </SafeAreaView>
     );
 }
@@ -100,20 +113,21 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems:"center",
-        gap:55,
-        justifyContent:"center"
+        alignItems: "center",
+        gap: 55,
+         
     },
 
-    categories: {  
-        flexDirection:"row",
-        justifyContent:"space-between",
+    categories: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        top:20
     },
     categoryrapper: {
         width: 120,
         height: 80,
         alignItems: "center",
-        
+
     },
     category: {
         height: 90,
@@ -137,5 +151,5 @@ const styles = StyleSheet.create({
         color: "#008000",
         top: 3
     },
-    
+
 });

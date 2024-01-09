@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Switch, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Switch, } from 'react-native';
 const entryImage = require('../../assets/discountbannerimage.png');
 import { EvilIcons, AntDesign, FontAwesome, Ionicons, } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const deliverylocationicons = require('../../assets/deliverylocationicons.png');
 

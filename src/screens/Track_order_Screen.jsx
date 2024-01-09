@@ -7,13 +7,15 @@ import {
   Text,
   TouchableOpacity,
   Image,
+  Linking,
+  Platform
 } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
-import { AntDesign, Entypo, MaterialIcons, SimpleLineIcons  } from "@expo/vector-icons";
+import { AntDesign, Entypo, MaterialIcons, SimpleLineIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 const Shopper = require("../../assets/shopperimage.png");
 
-export default function TrackOrder() {
+export default function TrackOrder({ navigation }) {
   const accraRegion = {
     latitude: 5.6037,
     longitude: -0.187,
@@ -23,17 +25,25 @@ export default function TrackOrder() {
 
   const refRBSheet = useRef();
 
+  const makePhoneCall = () => {
+    if (Platform.OS === "android") {
+      Linking.openURL("tel: 0209525480")
+    } else {
+      Linking.openURL("telprompt: 0209525480")
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
         <TouchableOpacity
-        activeOpacity={0.8}
+          activeOpacity={0.8}
           style={styles.button}
           onPress={() => refRBSheet.current.open()}
         >
-           <SimpleLineIcons name="menu" size={24} color="black" />
+          <SimpleLineIcons name="menu" size={24} color="black" />
         </TouchableOpacity>
-        
+
         <MapView style={styles.map} initialRegion={accraRegion}>
           <Marker coordinate={accraRegion} title="Accra, Ghana" />
         </MapView>
@@ -52,7 +62,7 @@ export default function TrackOrder() {
           },
         }}
       >
-        <View style={{ gap: 15,   }}>
+        <View style={{ gap: 15, }}>
           <View style={{ flexDirection: "row", gap: 10, paddingHorizontal: 5 }}>
             <AntDesign
               name="clockcircle"
@@ -94,12 +104,12 @@ export default function TrackOrder() {
               flexDirection: "row",
               gap: 10,
               alignItems: "center",
-              justifyContent:"space-between",
+              justifyContent: "space-between",
               paddingHorizontal: 5,
-              
+
             }}
           >
-            <View style={{ flexDirection: "row", gap:10 }}>
+            <View style={{ flexDirection: "row", gap: 10 }}>
               <Image source={Shopper} style={styles.shopperimage} />
 
               <View>
@@ -110,8 +120,9 @@ export default function TrackOrder() {
               </View>
             </View>
 
-            <View style={{flexDirection:"row", gap:20}}>
+            <View style={{ flexDirection: "row", gap: 20 }}>
               <Entypo
+                onPress={() => makePhoneCall()}
                 name="phone"
                 size={24}
                 color="#fff"

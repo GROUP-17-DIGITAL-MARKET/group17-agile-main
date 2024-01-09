@@ -12,7 +12,7 @@ export default function MobileMoney({navigation}) {
 
   let amount = 0;
     storeData.forEach(element => {
-        amount += element.price
+      amount += element.price * element.quantity;
     });
 
 

@@ -9,11 +9,11 @@ import { authentication } from '../../config/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-
-
+import { useToast } from "react-native-toast-notifications";
 
 
 export default function ShopperSigninScreen({ navigation }) {
+    const toast = useToast();
     const nav = useNavigation()
     const [isVisible, setisVisible] = useState(false);
     const [loginCredencials, setloginCredencials] = useState(
@@ -25,12 +25,17 @@ export default function ShopperSigninScreen({ navigation }) {
 
     const { email, password } = loginCredencials;
 
-
     const loginUser = () => {
 
         signInWithEmailAndPassword(authentication, email, password)
             .then((val) => {
-                Alert.alert("Login Successful!")
+                toast.show("Login Successful!", {
+                    type: "success",
+                    placement: "top",
+                    duration: 3000,
+                    offset: 30,
+                    animationType: "slide-in",
+                  });
                 nav.replace('ShopperProfileScreen')
             }).catch((err) => {
                 Alert.alert(err.message)
@@ -39,10 +44,10 @@ export default function ShopperSigninScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar style='white' />
+            <StatusBar style='#fff' backgroundColor='#53E559' />
 
             <View style={styles.curve}>
-                <AntDesign onPress={() => navigation.navigate('Entry')} name="arrowleft" size={30} color="black" style={{ color: myColors.secondary, marginLeft: 10, marginTop: 20 }} />
+                <AntDesign onPress={() => navigation.navigate('ShopperEntryScreen')} name="arrowleft" size={30} color="black" style={{ color: myColors.secondary, marginLeft: 10, marginTop: 20 }} />
             </View>
 
             <View style={{ justifyContent: "center", flexDirection: "row" }}>

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import {
   StyleSheet,
@@ -7,14 +7,18 @@ import {
   Text,
   TouchableOpacity,
   Image,
+  Linking,
+  Platform
 } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
-import { AntDesign, Entypo, MaterialIcons, SimpleLineIcons } from "@expo/vector-icons";
+import { AntDesign, Entypo, MaterialIcons, SimpleLineIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ScrollView } from "react-native-gesture-handler";
 const Shopper = require("../../assets/shopperimage.png");
+const Profileimage = require('../../assets/userImage.png');
+import * as Location from 'expo-location';
 
-export default function ShopperTracker({navigation}) {
+
+export default function ShopperTracker({ navigation }) {
   const accraRegion = {
     latitude: 5.6037,
     longitude: -0.187,
@@ -23,6 +27,46 @@ export default function ShopperTracker({navigation}) {
   };
 
   const refRBSheet = useRef();
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  const makePhoneCall = () => {
+    if(Platform.OS === "android"){
+      Linking.openURL("tel: 0555078657")
+    }else{
+      Linking.openURL("telprompt: 0555078657")
+    }
+  }
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let currentLocation = await Location.getCurrentPositionAsync({});
+      let { latitude, longitude } = currentLocation.coords;
+
+      try {
+        let address = await Location.reverseGeocodeAsync({ latitude, longitude });
+        setLocation(address[0]);
+      } catch (error) {
+        setErrorMsg('Error fetching address');
+      }
+    })();
+  }, []);
+
+  let text = 'Waiting...';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    const { street, city, region, country } = location;
+
+
+    text = `Location: ${street}, ${city}`;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -51,23 +95,25 @@ export default function ShopperTracker({navigation}) {
           draggableIcon: {
             backgroundColor: "#000",
           },
+          container: {
+            height: 320,
+
+          }
         }}
       >
-        <ScrollView style={{ gap: 15, }}>
+        <View style={{ gap: 15, }}>
           <View style={{ flexDirection: "row", gap: 10, paddingHorizontal: 5 }}>
-            <AntDesign
-              name="clockcircle"
-              size={24}
+
+            <MaterialCommunityIcons name="office-building" size={24}
               color="#fff"
               style={{
                 padding: 20,
                 backgroundColor: "#D5697C",
                 borderRadius: 5,
-              }}
-            />
+              }} />
             <View>
               <Text style={{ color: "#808080" }}>Market</Text>
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>Madina</Text>
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>Makola</Text>
             </View>
           </View>
 
@@ -91,20 +137,18 @@ export default function ShopperTracker({navigation}) {
           </View>
 
           <View style={{ flexDirection: "row", gap: 10, paddingHorizontal: 5 }}>
-            <AntDesign
-              name="clockcircle"
-              size={24}
+
+            <Entypo name="location-pin" size={24}
               color="#fff"
               style={{
                 padding: 20,
                 backgroundColor: "#DE5FDE",
                 borderRadius: 5,
-              }}
-            />
+              }} />
             <View>
               <Text style={{ color: "#808080" }}>Address</Text>
               <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                Number 12, Antelope Street
+                {text}
               </Text>
             </View>
           </View>
@@ -120,18 +164,18 @@ export default function ShopperTracker({navigation}) {
             }}
           >
             <View style={{ flexDirection: "row", gap: 10 }}>
-              <Image source={Shopper} style={styles.shopperimage} />
+              <Image source={Profileimage} style={styles.shopperimage} />
 
               <View>
-                <Text style={{ color: "#808080" }}>Your Shopper</Text>
                 <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                  Linda Essinu
+                  Selasi
                 </Text>
               </View>
             </View>
 
             <View style={{ flexDirection: "row", gap: 20 }}>
               <Entypo
+                onPress={() => makePhoneCall()}
                 name="phone"
                 size={24}
                 color="#fff"
@@ -150,12 +194,12 @@ export default function ShopperTracker({navigation}) {
                   backgroundColor: "#DFA436",
                   borderRadius: 10,
                 }}
-                onPress={() => navigation.navigate('ChatScreen')}
-                
+                 onPress={() => navigation.navigate('ChatScreen')}
+
               />
             </View>
           </View>
-        </ScrollView>
+        </View>
       </RBSheet>
     </SafeAreaView>
   );

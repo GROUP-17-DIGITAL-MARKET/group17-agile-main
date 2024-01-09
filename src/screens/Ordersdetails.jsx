@@ -6,7 +6,6 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView,
   form,
 } from "react-native";
 import {
@@ -25,6 +24,7 @@ import ProgressSteps, {
   Content,
 } from "@joaosousa/react-native-progress-steps";
 import { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Ordersdetails({ navigation }) {
   const nav = useNavigation();
@@ -39,8 +39,8 @@ export default function Ordersdetails({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ flexDirection: "row", paddingVertical:20 }}>
-        <AntDesign name="arrowleft" size={34} color="#53E559" />
+      <View style={{ flexDirection: "row", paddingVertical: 20 }}>
+        <AntDesign name="arrowleft" size={34} color="#53E559" onPress={() => navigation.goBack()}/>
         <View
           style={{
             width: 300,
@@ -62,10 +62,10 @@ export default function Ordersdetails({ navigation }) {
           backgroundColor: "#FFFFFF",
           borderRadius: 20,
           paddingHorizontal: 20,
-          paddingVertical:20
+          paddingVertical: 20
         }}
       >
-        <View style={{height:200, alignItems:"center", justifyContent:"center"}}>
+        <View style={{ height: 200, alignItems: "center", justifyContent: "center" }}>
           <ProgressSteps
             currentStep={step}
             steps={[
@@ -207,7 +207,17 @@ export default function Ordersdetails({ navigation }) {
         >
           <Text style={{ color: "#808080", fontSize: 15 }}>Total Price</Text>
           <Text style={{ color: "#808080", fontSize: 15 }}>{amount}</Text>
+          
         </View>
+        <View style={{ justifyContent: "flex-end", alignItems: "center", marginHorizontal: 20,   }}>
+            <TouchableOpacity 
+            onPress={() => navigation.navigate('JustDeliveredOrder')}
+            style={styles.CompletepButtontext} >
+              <Text style={{ fontSize: 18, fontWeight: 600, color: "#FFFFFF" }}>
+                 Complete
+              </Text>
+            </TouchableOpacity>
+          </View >
       </View>
     </SafeAreaView>
   );
@@ -226,4 +236,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "600",
   },
+  CompletepButtontext:{
+    backgroundColor:"#53E559",
+    width:250,
+    alignItems:"center",
+    justifyContent:"center",
+    height:46,
+    borderRadius:14
+  }
 });

@@ -8,44 +8,44 @@ const entryImage = require('../../assets/entry-image.jpg');
 export default function EntryScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
-         
-            <View style={{alignItems:"center"}}>
+
+            <View style={{ alignItems: "center" }}>
                 <Image source={entryImage} style={styles.image} />
             </View>
 
             <View>
-            <Text style={styles.freshDescription}>Hassle-free Fresh Groceries</Text>
-            <Text style={styles.joinDescription}>
-                Join us to receive groceries as
-                early as 7AM daily in the morning.
-            </Text>
+                <Text style={styles.freshDescription}>Hassle-free Fresh Groceries</Text>
+                <Text style={styles.joinDescription}>
+                    Join us to receive groceries as
+                    early as 7AM daily in the morning.
+                </Text>
 
             </View>
-        
-         
 
-            <View style={{top:50, height:250, justifyContent:"flex-end"}}>
-            <TouchableOpacity
-            activeOpacity={0.8}
-             onPress={() => navigation.navigate('Signin')}>
-                <View style={styles.SignInButton}>
-                   <Text style={{color:"#fff", fontWeight:"bold"}}>SIGN IN</Text>
-                </View>   
-              </TouchableOpacity>
 
-              <TouchableOpacity 
-              activeOpacity={0.8}
-              onPress={() => navigation.navigate('Signup')}>
-                <View style={styles.SignUpButton}>
-                   <Text style={{color:"#53E559", fontWeight:"bold",  }}>CREATE AN ACCOUNT</Text>
-                </View>   
-            </TouchableOpacity>
+
+            <View style={{ top: 50, height: 250, justifyContent: "flex-end" }}>
+                <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => navigation.navigate('Signin')}>
+                    <View style={styles.SignInButton}>
+                        <Text style={{ color: "#fff", fontWeight: "bold" }}>SIGN IN</Text>
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => navigation.navigate('Signup')}>
+                    <View style={styles.SignUpButton}>
+                        <Text style={{ color: "#53E559", fontWeight: "bold", }}>CREATE AN ACCOUNT</Text>
+                    </View>
+                </TouchableOpacity>
 
             </View>
-              
- 
-  
-     </SafeAreaView>
+
+
+
+        </SafeAreaView>
     );
 }
 
@@ -54,51 +54,51 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    
+
     image: {
-        width: 400,  
-        height: 400,  
+        width: 400,
+        height: 400,
         resizeMode: 'contain',
     },
-  
-    freshDescription:{
-    fontSize: 22, 
-     display:"flex",
-     color: '#DFA436',
-     top: 15,
-     display:"flex",
-     textAlign:"center"
+
+    freshDescription: {
+        fontSize: 22,
+        display: "flex",
+        color: '#DFA436',
+        top: 15,
+        display: "flex",
+        textAlign: "center"
     },
 
     joinDescription: {
         fontSize: 16,
         top: 30,
-        display:"flex",
-        textAlign:"center"
+        display: "flex",
+        textAlign: "center"
     },
     SignInButton: {
-        backgroundColor:"#53E559",
-        color:"#fff",  
-        alignItems:"center",
-        justifyContent:"center",
+        backgroundColor: "#53E559",
+        color: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
         paddingVertical: 20,
-        marginHorizontal:10,
-        borderRadius:15,
-        fontWeight:"bold"
+        marginHorizontal: 10,
+        borderRadius: 15,
+        fontWeight: "bold"
     },
 
     SignUpButton: {
-        backgroundColor:"#fff",
-        color:"#fff", 
-        alignItems:"center",
-        justifyContent:"center",
+        backgroundColor: "#fff",
+        color: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
         paddingVertical: 20,
-        marginHorizontal:10,
-        borderRadius:15,
-        fontWeight:"bold",
-        marginTop:20,
-        borderWidth:2,
-        borderColor:"#53E559"
+        marginHorizontal: 10,
+        borderRadius: 15,
+        fontWeight: "bold",
+        marginTop: 20,
+        borderWidth: 2,
+        borderColor: "#53E559"
     }
 
 });

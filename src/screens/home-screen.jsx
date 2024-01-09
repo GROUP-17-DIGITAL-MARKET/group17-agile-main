@@ -1,37 +1,66 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, ScrollView, SafeAreaView, TextInput, } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, ScrollView, TextInput, } from 'react-native';
 import { EvilIcons, AntDesign, FontAwesome, Ionicons, } from '@expo/vector-icons';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
 import { myColors } from '../utils/Mycolors';
-
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getDoc, doc, getFirestore } from 'firebase/firestore';
 const entryImage = require('../../assets/discountbannerimage.png');
 const homemarketimage = require('../../assets/dome.png');
-
 import HomeRecommendedcarousel from './Home-recomended-carousel';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import HomeCategorycarousel from './Home-category-carousel';
-
+import { SafeAreaView } from 'react-native-safe-area-context';
+const authentication = getAuth();
+const database = getFirestore();
 
 export default function HomeScreen({ navigation }) {
     const nav = useNavigation()
+    const [username, setUsername] = useState('');
+
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(authentication, (user) => {
+            if (user) {
+                const userId = user.uid;
+                const userDocRef = doc(database, 'users', userId);
+
+                getDoc(userDocRef)
+                    .then((docSnapshot) => {
+                        if (docSnapshot.exists()) {
+                            const userData = docSnapshot.data();
+                            setUsername(userData.username);
+                        } else {
+                            console.error('Error fetching user data');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching user data:', error);
+                    });
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false} style={{ gap: 20, flex: 1 }}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, backgroundColor:"#ffffff" }}>
                 <View style={styles.profileAndnotification} >
                     <TouchableOpacity onPress={() => nav.navigate('ProfileScreen')} style={styles.nameAndpicture}>
                         <Image onPress={() => nav.navigate('ProfileScreen')} source={entryImage} style={styles.image} />
-                        <Text onPress={() => nav.navigate('ProfileScreen')} style={styles.name}>Hi Selassi</Text>
+                        <Text onPress={() => nav.navigate('ProfileScreen')} style={styles.name}>Hi {username}</Text>
                     </TouchableOpacity>
 
                     <Ionicons name="notifications" size={28} color="black" style={styles.notificationIcon} onPress={() => nav.navigate('UserNotification')} />
                 </View>
+                
 
                 <View style={styles.seachAndFilter}>
-                    <Ionicons name="search" size={24} color="black" style={styles.searchicon} onPress={() => navigation.goBack()} />
+                    <Ionicons name="search" size={24} color="black" style={styles.searchicon} />
                     <TextInput placeholder='Markets around you' style={styles.search} />
-                    <Ionicons name="filter-outline" size={28} color="black" style={styles.notificationIcon} onPress={() => navigation.goBack()} />
+                    <Ionicons name="filter-outline" size={28} style={styles.notificationIcon} />
                 </View>
 
                 <View style={styles.discountBanner}>
@@ -85,9 +114,12 @@ export default function HomeScreen({ navigation }) {
                     >See all</Text>
                 </View>
 
-                <View style={styles.markets}>
+                <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => navigation.navigate('Markets')}
+                    style={styles.markets}>
                     <Image source={homemarketimage} style={styles.homemarketimage} />
-                </View>
+                </TouchableOpacity>
 
 
                 <View style={styles.recommendedlabel}>
@@ -154,33 +186,31 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         marginHorizontal: 5,
-        paddingTop: 50,
-
     },
     label: {
         flexDirection: "row",
         justifyContent: "space-between",
-        top: 50,
-        paddingHorizontal: 15
+        paddingHorizontal: 15,
+        paddingVertical:15
     },
     marketlabel: {
         flexDirection: "row",
         justifyContent: "space-between",
-        top: 110,
-        paddingHorizontal: 15
+        paddingHorizontal: 15,
+        paddingVertical:15
     },
     taglabel: {
         flexDirection: "row",
         justifyContent: "space-between",
-        top: 180,
-        paddingHorizontal: 15
+        paddingHorizontal: 15,
+        paddingVertical:15
     },
 
     recommendedlabel: {
         flexDirection: "row",
         justifyContent: "space-between",
-        top: 150,
-        paddingHorizontal: 15
+        paddingHorizontal: 15,
+        paddingVertical:15
     },
 
 
@@ -203,7 +233,9 @@ const styles = StyleSheet.create({
     },
     profileAndnotification: {
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        paddingVertical:10,
+         
     },
     notificationIcon: {
         right: 20,
@@ -214,7 +246,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        top: 10,
+        paddingVertical:5
+        
 
     },
     searchicon: {
@@ -233,10 +266,10 @@ const styles = StyleSheet.create({
     },
 
     discountBanner: {
-        backgroundColor: "#fff",
-        top: 30,
+        backgroundColor: "#FFFFFF",
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        paddingVertical:15
     },
 
     discountimage: {
@@ -268,44 +301,11 @@ const styles = StyleSheet.create({
     },
 
     categories: {
-        top: 95,
-        paddingTop: 8,
-        paddingBottom: 10,
-
+        paddingVertical:15
 
     },
-    categoryrapper: {
-        width: 80,
-        height: 80,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    category: {
-        height: 70,
-        width: 70,
-        backgroundColor: "green",
-        justifyContent: "center",
-        alignItems: "center",
-        borderBottomRightRadius: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        left: 5,
-
-    },
-    categoryimage: {
-        height: 34.5,
-        width: 34.5
-    },
-    categorytext: {
-        fontSize: 15,
-        fontWeight: "bold",
-        color: "#008000",
-        top: 3
-    },
-
-
+    
     markets: {
-        top: 130,
         alignItems: "center",
         justifyContent: "center"
 
@@ -317,31 +317,13 @@ const styles = StyleSheet.create({
     },
 
     recomended: {
-
-        top: 170,
         paddingVertical: 2,
 
 
     },
 
-    recomendeditem: {
-        height: 140,
-        width: 160,
-        borderWidth: 2,
-        borderRadius: 10,
-        padding: 3
-    },
-    recommendedimage: {
-        height: 90,
-        left: 5,
-    },
-    priceandplusicon: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        top: 5
-    },
+     
     tags: {
-        marginTop: 200,
         marginBottom: 30,
         paddingVertical: 5,
 

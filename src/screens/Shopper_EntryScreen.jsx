@@ -21,7 +21,7 @@ export default function ShopperEntryScreen({ navigation }) {
       <View>
         <Text style={styles.freshDescription}>Fast Delivery Service</Text>
         <Text style={styles.joinDescription}>
-          Fast delivery of <Text style={{color:"#DFA436"}}>groceries</Text>  at a go!
+          Delivery of groceries at a go!
         </Text>
       </View>
 
