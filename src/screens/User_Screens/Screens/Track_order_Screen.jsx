@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import {
   StyleSheet,
@@ -14,8 +14,16 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import { AntDesign, Entypo, MaterialIcons, SimpleLineIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 const Shopper = require("../../../../assets/shopperimage.png");
+import { collection, getDocs } from "firebase/firestore";
+import { getDoc, doc } from 'firebase/firestore';
+import { auth, db } from "../../../../config/firebase";
+import * as Location from 'expo-location';
 
 export default function TrackOrder({ navigation }) {
+  const [userInfo, setUserInfo] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
   const accraRegion = {
     latitude: 5.6037,
     longitude: -0.187,
@@ -27,10 +35,65 @@ export default function TrackOrder({ navigation }) {
 
   const makePhoneCall = () => {
     if (Platform.OS === "android") {
-      Linking.openURL("tel: 0209525480")
+      Linking.openURL(`tel:${userInfo.PhoneNumber}`);
     } else {
-      Linking.openURL("telprompt: 0209525480")
+      Linking.openURL(`telprompt:${userInfo.PhoneNumber}`);
     }
+  }
+
+  const getData = async () => {
+    const docRef = doc(db, "Shoppers", "e9LBlNmAyieC3Ne5flLFpzCuuLd2");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      setUserInfo(docSnap.data());
+    } else {
+      console.log("No such document!");
+    }
+  };
+  const getUserData = async () => {
+    const querySnapshot = await getDocs(collection(db, "Shoppers"));
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+      setUserInfo(doc.data())
+    });
+  };
+
+
+  useEffect(() => {
+    // getData();
+    getUserData();
+  }, []);
+
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let currentLocation = await Location.getCurrentPositionAsync({});
+      let { latitude, longitude } = currentLocation.coords;
+
+      try {
+        let address = await Location.reverseGeocodeAsync({ latitude, longitude });
+        setLocation(address[0]);  
+      } catch (error) {
+        setErrorMsg('Error fetching address');
+      }
+    })();
+  }, []);
+
+  let text = 'Waiting...';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    const { street, city, region, country } = location;
+
+     
+    text = `Location: ${street}, ${city}`;
   }
 
   return (
@@ -94,7 +157,7 @@ export default function TrackOrder({ navigation }) {
             <View>
               <Text style={{ color: "#808080" }}>Location</Text>
               <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                Number 12, Antelope street
+              {text}
               </Text>
             </View>
           </View>
@@ -115,7 +178,7 @@ export default function TrackOrder({ navigation }) {
               <View>
                 <Text style={{ color: "#808080" }}>Your Shopper</Text>
                 <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                  Linda Essinu
+                  {userInfo?.Name}
                 </Text>
               </View>
             </View>

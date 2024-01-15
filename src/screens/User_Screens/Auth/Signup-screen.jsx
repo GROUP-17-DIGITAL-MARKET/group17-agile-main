@@ -1,8 +1,8 @@
 
-import React, { useState } from 'react';
-import { StyleSheet, Text, View,  TextInput, Alert, Modal, } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { StyleSheet, Text, View, TextInput, Alert, Modal, } from 'react-native';
 import { AntDesign, FontAwesome, Ionicons, } from '@expo/vector-icons';
-import { GRAY_COLORS, GREEN_COLORS, WHITE_COLORS, } from '../../../utils/Mycolors';
+import { BLACK_COLORS, GRAY_COLORS, GREEN_COLORS, WHITE_COLORS, } from '../../../utils/Mycolors';
 import { KeyboardAvoidingView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -11,19 +11,19 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { auth, db } from '../../../../config/firebase';
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
- 
+import PhoneNumberInput from "react-native-phone-number-input";
 
 
 export default function SignupScreen({ navigation }) {
-     
+
     const nav = useNavigation()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
-    // const [phone, setPhone] = useState ("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [loading, setLoading] = useState(false);
     const [isVisible, setisVisible] = useState(true);
-
+    const phoneInputRef = useRef(null);
 
     const handleSignup = async () => {
         setLoading(true);
@@ -34,7 +34,7 @@ export default function SignupScreen({ navigation }) {
                 setDoc(doc(db, "users", user.uid), {
                     Name: username,
                     Email: email,
-                    // PhoneNumber: phone,
+                    PhoneNumber: phoneNumber,
                     CreatedAt: new Date().toUTCString(),
                 });
                 nav.replace('Signin')
@@ -101,6 +101,43 @@ export default function SignupScreen({ navigation }) {
                     </View>
 
                     <View style={styles.inputView}>
+                        <PhoneNumberInput
+                            value={phoneNumber}
+                            onChangeText={(text) => setPhoneNumber(text)}
+                            ref={phoneInputRef}
+                            defaultCode="GH"
+                            layout="first"
+                            withDarkTheme
+                            containerStyle={{
+                                backgroundColor: GRAY_COLORS.LIGHT_GRAY,
+                                height: 50,
+                                width: 350,
+                                borderRadius: 40,
+                                 
+                                
+                                
+                            }}
+                            textInputProps={{
+                                selectionColor: BLACK_COLORS.BLACK,
+                                
+                            }}
+                            textContainerStyle={{
+                                backgroundColor: "transparent",
+                                borderLeftColor: WHITE_COLORS.WHITE,
+                                borderLeftWidth: 1,
+                            }}
+                            textInputStyle={{
+                                color: BLACK_COLORS.BLACK,
+                                
+                            }}
+                            codeTextStyle={{
+                                color:BLACK_COLORS.BLACK,
+                            }}
+
+                        />
+                    </View>
+
+                    <View style={styles.inputView}>
                         <FontAwesome name="lock" size={30} color="black" style={{ color: GRAY_COLORS.MEDIUM_GRAY, marginTop: 0, marginLeft: 5, position: "absolute", zIndex: 2 }} />
                         <TextInput
                             secureTextEntry={isVisible}
@@ -108,7 +145,7 @@ export default function SignupScreen({ navigation }) {
                             placeholder='Password'
                             style={styles.textInput}
                             value={password}
-                             
+
                             onChangeText={(text) => setPassword(text)}
                         />
                         <Ionicons name={isVisible == true ? "eye-off-outline" : "eye-outline"}
@@ -145,8 +182,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: WHITE_COLORS.WHITE,
-
-
     },
 
     inputView: {

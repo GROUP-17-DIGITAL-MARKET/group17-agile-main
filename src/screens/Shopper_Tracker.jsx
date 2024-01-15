@@ -13,12 +13,15 @@ import {
 import RBSheet from "react-native-raw-bottom-sheet";
 import { AntDesign, Entypo, MaterialIcons, SimpleLineIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-const Shopper = require("../../assets/shopperimage.png");
 const Profileimage = require('../../assets/userImage.png');
 import * as Location from 'expo-location';
-
+import { auth, db } from "../../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 export default function ShopperTracker({ navigation }) {
+  const [userInfo, setUserInfo] = useState(null);
+
   const accraRegion = {
     latitude: 5.6037,
     longitude: -0.187,
@@ -31,10 +34,11 @@ export default function ShopperTracker({ navigation }) {
   const [errorMsg, setErrorMsg] = useState(null);
 
   const makePhoneCall = () => {
-    if(Platform.OS === "android"){
-      Linking.openURL("tel: 0555078657")
-    }else{
-      Linking.openURL("telprompt: 0555078657")
+    if (Platform.OS === "android") {
+      Linking.openURL(`tel:${userInfo.PhoneNumber}`);
+    } else {
+      Linking.openURL(`telprompt:${userInfo.PhoneNumber}`);
+      
     }
   }
 
@@ -67,6 +71,31 @@ export default function ShopperTracker({ navigation }) {
 
     text = `Location: ${street}, ${city}`;
   }
+
+  const getData = async () => {
+    const docRef = doc(db, "users", "e9LBlNmAyieC3Ne5flLFpzCuuLd2");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      setUserInfo(docSnap.data());
+    } else {
+      console.log("No such document!");
+    }
+  };
+  const getUserData = async () => {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+      setUserInfo(doc.data())
+    });
+  };
+
+
+  useEffect(() => {
+    // getData();
+    getUserData();
+  }, []);
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -163,12 +192,12 @@ export default function ShopperTracker({ navigation }) {
 
             }}
           >
-            <View style={{ flexDirection: "row", gap: 10 }}>
+            <View style={{ flexDirection: "row", gap: 10, alignItems:"center"}}>
               <Image source={Profileimage} style={styles.shopperimage} />
 
               <View>
                 <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                  Selasi
+                  {userInfo?.Name}
                 </Text>
               </View>
             </View>
@@ -194,7 +223,7 @@ export default function ShopperTracker({ navigation }) {
                   backgroundColor: "#DFA436",
                   borderRadius: 10,
                 }}
-                 onPress={() => navigation.navigate('ChatScreen')}
+                onPress={() => navigation.navigate('ChatScreen')}
 
               />
             </View>

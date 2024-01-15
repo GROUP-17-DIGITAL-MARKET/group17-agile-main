@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,7 +12,7 @@ import {
   Ionicons,
 } from "@expo/vector-icons";
 
-import { GRAY_COLORS, GREEN_COLORS, WHITE_COLORS, myColors } from "../utils/Mycolors";
+import { BLACK_COLORS, GRAY_COLORS, GREEN_COLORS, WHITE_COLORS, } from "../utils/Mycolors";
 import { KeyboardAvoidingView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -21,17 +21,17 @@ import { auth, db } from "../../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-
+import PhoneNumberInput from "react-native-phone-number-input";
 
 
 export default function ShopperSignupScreen({ navigation }) {
   const [isVisible, setisVisible] = useState(true);
   const nav = useNavigation()
-
+  const phoneInputRef = useRef(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  // const [phone, setPhone] = useState ("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
 
 
@@ -45,7 +45,7 @@ export default function ShopperSignupScreen({ navigation }) {
         setDoc(doc(db, "Shoppers", user.uid), {
           Name: username,
           Email: email,
-          // PhoneNumber: phone,
+          PhoneNumber: phoneNumber,
           CreatedAt: new Date().toUTCString(),
         });
         nav.replace('ShopperSigninScreen')
@@ -140,6 +140,43 @@ export default function ShopperSignupScreen({ navigation }) {
             onChangeText={(text) => setEmail(text)}
           />
         </KeyboardAvoidingView>
+
+        <View style={styles.inputView}>
+          <PhoneNumberInput
+            value={phoneNumber}
+            onChangeText={(text) => setPhoneNumber(text)}
+            ref={phoneInputRef}
+            defaultCode="GH"
+            layout="first"
+            withDarkTheme
+            containerStyle={{
+              backgroundColor: GRAY_COLORS.LIGHT_GRAY,
+              height: 50,
+              width: 350,
+              borderRadius: 40,
+
+
+
+            }}
+            textInputProps={{
+              selectionColor: BLACK_COLORS.BLACK,
+
+            }}
+            textContainerStyle={{
+              backgroundColor: "transparent",
+              borderLeftColor: WHITE_COLORS.WHITE,
+              borderLeftWidth: 1,
+            }}
+            textInputStyle={{
+              color: BLACK_COLORS.BLACK,
+
+            }}
+            codeTextStyle={{
+              color: BLACK_COLORS.BLACK,
+            }}
+
+          />
+        </View>
 
         <KeyboardAvoidingView style={styles.inputView}>
           <FontAwesome

@@ -111,7 +111,6 @@ const ProfileScreen = ({ navigation }) => {
       { text: "Logout", onPress: handleSignout },
     ]);
 
-
   };
 
   return (
