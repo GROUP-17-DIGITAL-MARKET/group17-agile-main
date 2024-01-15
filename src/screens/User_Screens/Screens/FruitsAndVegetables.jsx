@@ -1,4 +1,3 @@
- 
 import React, { useState } from 'react';
 import {
   View,
@@ -14,11 +13,11 @@ import {Picker} from '@react-native-picker/picker';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { useNavigation } from '@react-navigation/native';
-import { Spice } from '../utils/Data';
+import { fruitsAndvegetables } from '../../../utils/Data';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../../Redux/CartSlice';
+import { addToCart } from '../../../../Redux/CartSlice';
 
-export default function Spices() {
+export default function FruitsAndVegetables() {
   const dispatch = useDispatch();
   const storeData = useSelector((state) => state.CartSlice);
   const nav = useNavigation();
@@ -26,7 +25,7 @@ export default function Spices() {
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredData = Spice.filter((item) => {
+  const filteredData = fruitsAndvegetables.filter((item) => {
     return (
       (filter === 'all' || item.name.toLowerCase().includes(filter.toLowerCase())) &&
       item.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -35,6 +34,7 @@ export default function Spices() {
 
   return (
     <View style={styles.container}>
+      <Text style={{fontSize:24, color:"#141414", marginVertical:10, fontWeight:"bold"}}>Fruits And Vegetables</Text>
       <View style={styles.filterContainer}>
         <Picker
           selectedValue={filter}
@@ -45,7 +45,7 @@ export default function Spices() {
           <Picker.Item label="Apple" value="apple" />
           <Picker.Item label="Banana" value="banana" />
           <Picker.Item label="Orange" value="orange" />
-          
+          {/* Add more items as needed */}
         </Picker>
         <TextInput
           style={styles.searchInput}
@@ -141,4 +141,3 @@ const styles = StyleSheet.create({
     
   },
 });
-

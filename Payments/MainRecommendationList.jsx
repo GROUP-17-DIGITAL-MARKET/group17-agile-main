@@ -3,6 +3,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import MobileMoney from './MobileMoney';
 import Cardpayment from './CardPayment';
 import CashPayment from './CashPayment';
+import { WHITE_COLORS } from '../src/utils/Mycolors';
 
 
 const Tab = createMaterialTopTabNavigator();
@@ -16,7 +17,7 @@ export default function CustomTopTabNavigator() {
           marginTop: 100,
           
         },
-        tabBarStyle: { backgroundColor: '#fff' },
+        tabBarStyle: { backgroundColor: WHITE_COLORS.WHITE },
         tabBarLabelStyle: {
           fontSize: 15,
           fontWeight:"bold",

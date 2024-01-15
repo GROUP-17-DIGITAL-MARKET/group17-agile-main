@@ -1,23 +1,16 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useEffect } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { myColors } from "../utils/Mycolors";
-const orderplaced = require('../../assets/orderplaced.png');
+import { GRAY_COLORS, GREEN_COLORS, WHITE_COLORS, myColors } from "../../../utils/Mycolors";
+const orderplaced = require('../../../../assets/orderplaced.png');
 
 const Orderplaced = ({navigation}) => {
-    //   const nav = useNavigation();
-    //   useEffect(() => {
-    //     setTimeout(() => {
-    //       nav.navigate("Home");
-    //     }, 2000);
-    //   }, []);
+
     return (
         <View
             style={{
                 flex: 1,
-                backgroundColor: "white",
+                backgroundColor: WHITE_COLORS.WHITE,
                 justifyContent: "center",
                 alignItems: "center",
                 gap:20
@@ -28,7 +21,7 @@ const Orderplaced = ({navigation}) => {
             <Text style={{ fontSize: 20, textAlign: "center", fontWeight: "600" }}>
                 Congrats,Your Order Places Successfully!!
             </Text>
-            <Text style={{ fontSize: 20, textAlign: "center", color:"#808080" }}>
+            <Text style={{ fontSize: 20, textAlign: "center", color:GRAY_COLORS.GRAY }}>
                 Thanks for your order. Please continue
                 browsing
             </Text>
@@ -42,14 +35,14 @@ const Orderplaced = ({navigation}) => {
                 }}
                 activeOpacity={0.8}
                 style={{
-                    backgroundColor: myColors.primary,
+                    backgroundColor: GREEN_COLORS.GREEN,
                     borderRadius: 30,
                     width:350,
                     height: 70,
                     justifyContent: "center",
                     alignItems: "center"
                 }}>
-                <Text style={{ color: "#fff", fontSize: 18, fontWeight: "700" }}>CONTINUE</Text>
+                <Text style={{ color: WHITE_COLORS.WHITE, fontSize: 18, fontWeight: "700" }}>CONTINUE</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -59,16 +52,16 @@ const Orderplaced = ({navigation}) => {
                 }}
                 activeOpacity={0.8}
                 style={{
-                    backgroundColor: "#fff",
+                    backgroundColor: WHITE_COLORS.WHITE,
                     borderWidth:2,
-                    borderColor: myColors.primary,
+                    borderColor: GREEN_COLORS.GREEN,
                     borderRadius: 30,
                     width:350,
                     height: 70,
                     justifyContent: "center",
                     alignItems: "center"
                 }}>
-                <Text style={{ color: myColors.primary, fontSize: 18, fontWeight: "700" }}>TRACK YOUR ORDER</Text>
+                <Text style={{ color: GREEN_COLORS.GREEN, fontSize: 18, fontWeight: "700" }}>TRACK YOUR ORDER</Text>
             </TouchableOpacity>
         </View>
     );

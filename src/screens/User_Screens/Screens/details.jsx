@@ -4,11 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import DropBox from './DropBox';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { myColors } from '../utils/Mycolors';
+import { GREEN_COLORS, WHITE_COLORS, myColors } from '../../../utils/Mycolors';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../../Redux/CartSlice';
-
-
+import { addToCart } from '../../../../Redux/CartSlice';
+ 
+ 
 
 export default function Details({ navigation, route }) {
     const storeData = useSelector((state) => state.CartSlice);
@@ -95,19 +95,17 @@ export default function Details({ navigation, route }) {
                             }}
                             activeOpacity={0.8}
                             style={{
-                                backgroundColor: myColors.primary,
+                                backgroundColor: GREEN_COLORS.GREEN,
                                 borderRadius: 15,
                                 height: 70,
                                 justifyContent: "center",
                                 alignItems: "center"
                             }}>
-                            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "700" }}>Add to Cart</Text>
+                            <Text style={{ color: WHITE_COLORS.WHITE, fontSize: 18, fontWeight: "700" }}>Add to Cart</Text>
                         </TouchableOpacity> 
                         )
                            
                     }
-
-
 
 
                 </View>
@@ -123,7 +121,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         gap: 20,
-        backgroundColor: "#fff"
+        backgroundColor: WHITE_COLORS.WHITE
     },
 
 });

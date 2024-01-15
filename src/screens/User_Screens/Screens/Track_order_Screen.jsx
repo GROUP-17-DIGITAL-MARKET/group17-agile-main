@@ -13,7 +13,7 @@ import {
 import RBSheet from "react-native-raw-bottom-sheet";
 import { AntDesign, Entypo, MaterialIcons, SimpleLineIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-const Shopper = require("../../assets/shopperimage.png");
+const Shopper = require("../../../../assets/shopperimage.png");
 
 export default function TrackOrder({ navigation }) {
   const accraRegion = {

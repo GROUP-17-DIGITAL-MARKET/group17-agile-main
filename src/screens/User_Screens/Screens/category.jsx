@@ -1,17 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback,  } from 'react-native';
-const Fruits = require('../../assets/Fruits.png');
+const Fruits = require('../../../../assets/Fruits.png');
 import { Ionicons, Feather} from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
-const Grains = require('../../assets/grains.png');
-const Meat = require('../../assets/Meat.png');
-const Dairy = require('../../assets/Dairy.png');
-const Beverages = require('../../assets/beverages.png');
-const Cereals = require('../../assets/cereals.png');
-const Fish = require('../../assets/Fish.png');
-const Spice = require('../../assets/Spice.png');
-const Oil = require('../../assets/Oil.png');
+import { GREEN_COLORS,  WHITE_COLORS } from '../../../utils/Mycolors';
+const Grains = require('../../../../assets/grains.png');
+const Meat = require('../../../../assets/Meat.png');
+const Dairy = require('../../../../assets/Dairy.png');
+const Beverages = require('../../../../assets/beverages.png');
+const Cereals = require('../../../../assets/cereals.png');
+const Fish = require('../../../../assets/Fish.png');
+const Spice = require('../../../../assets/Spice.png');
+const Oil = require('../../../../assets/Oil.png');
 
 
 
@@ -112,10 +112,11 @@ export default function Category({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: WHITE_COLORS.WHITE,
         alignItems: "center",
         gap: 55,
          
+
     },
 
     categories: {
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
     category: {
         height: 90,
         width: 90,
-        backgroundColor: "green",
+        backgroundColor: GREEN_COLORS.DEEP_GREEN,
         justifyContent: "center",
         alignItems: "center",
         borderBottomRightRadius: 20,
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
     categorytext: {
         fontSize: 15,
         fontWeight: "bold",
-        color: "#008000",
+        color: GREEN_COLORS.DEEP_GREEN,
         top: 3
     },
 

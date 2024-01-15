@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { Paystack, paystackProps } from 'react-native-paystack-webview';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
+import { GREEN_COLORS, WHITE_COLORS } from '../src/utils/Mycolors';
 
 export default function Cardpayment({navigation}) {
   const storeData = useSelector((state) => state.CartSlice);
@@ -39,7 +40,7 @@ export default function Cardpayment({navigation}) {
         onPress={() => paystackWebViewRef.current.startTransaction()}
         style={styles.pay}
       >
-        <Text style={{color:"#fff", fontSize:20}}>Pay With Card</Text>
+        <Text style={{color:WHITE_COLORS.WHITE, fontSize:20}}>Pay With Card</Text>
       </TouchableOpacity >
   </View>
   );
@@ -48,14 +49,14 @@ export default function Cardpayment({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: WHITE_COLORS.WHITE,
     alignItems:"center",
     justifyContent:"center"
 
   },
   pay: {
     height: 50,
-    backgroundColor: "#53E559",
+    backgroundColor: GREEN_COLORS.GREEN,
     width: 350,
     borderRadius:20,
     alignItems:"center",

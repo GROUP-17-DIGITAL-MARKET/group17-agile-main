@@ -9,7 +9,7 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
-import { MyorderList } from "../utils/Data";
+import { MyorderList } from "../../../utils/Data";
 import {
   EvilIcons,
   AntDesign,

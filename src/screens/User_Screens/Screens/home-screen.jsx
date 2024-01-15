@@ -1,61 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, ScrollView, TextInput, } from 'react-native';
-import { EvilIcons, AntDesign, FontAwesome, Ionicons, } from '@expo/vector-icons';
+import { Ionicons, } from '@expo/vector-icons';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
-import { myColors } from '../utils/Mycolors';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getDoc, doc, getFirestore } from 'firebase/firestore';
-const entryImage = require('../../assets/discountbannerimage.png');
-const homemarketimage = require('../../assets/dome.png');
+import { GRAY_COLORS, GREEN_COLORS, ORANGE_COLORS, TOMATO_COLORS, WHITE_COLORS } from '../../../utils/Mycolors';
+const entryImage = require('../../../../assets/discountbannerimage.png');
+const homemarketimage = require('../../../../assets/dome.png');
 import HomeRecommendedcarousel from './Home-recomended-carousel';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import HomeCategorycarousel from './Home-category-carousel';
 import { SafeAreaView } from 'react-native-safe-area-context';
-const authentication = getAuth();
-const database = getFirestore();
+import { auth, db } from '../../../../config/firebase';
+import { doc, getDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, }) {
+    const [userInfo, setUserInfo] = useState(null);
     const nav = useNavigation()
-    const [username, setUsername] = useState('');
+
+
+
+    const getData = async () => {
+        const docRef = doc(db, "users", "e9LBlNmAyieC3Ne5flLFpzCuuLd2");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            setUserInfo(docSnap.data());
+        } else {
+            console.log("No such document!");
+        }
+    };
+    const getUserData = async () => {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+            console.log(doc.id, " => ", doc.data());
+            setUserInfo(doc.data())
+        });
+    };
+
 
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(authentication, (user) => {
-            if (user) {
-                const userId = user.uid;
-                const userDocRef = doc(database, 'users', userId);
-
-                getDoc(userDocRef)
-                    .then((docSnapshot) => {
-                        if (docSnapshot.exists()) {
-                            const userData = docSnapshot.data();
-                            setUsername(userData.username);
-                        } else {
-                            console.error('Error fetching user data');
-                        }
-                    })
-                    .catch((error) => {
-                        console.error('Error fetching user data:', error);
-                    });
-            }
-        });
-
-        return () => unsubscribe();
+        // getData();
+        getUserData();
     }, []);
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, backgroundColor:"#ffffff" }}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, backgroundColor: WHITE_COLORS.WHITE }}>
                 <View style={styles.profileAndnotification} >
                     <TouchableOpacity onPress={() => nav.navigate('ProfileScreen')} style={styles.nameAndpicture}>
                         <Image onPress={() => nav.navigate('ProfileScreen')} source={entryImage} style={styles.image} />
-                        <Text onPress={() => nav.navigate('ProfileScreen')} style={styles.name}>Hi {username}</Text>
+                        <Text onPress={() => nav.navigate('ProfileScreen')} style={styles.name}>Hi, {userInfo?.Name}</Text>
                     </TouchableOpacity>
 
                     <Ionicons name="notifications" size={28} color="black" style={styles.notificationIcon} onPress={() => nav.navigate('UserNotification')} />
                 </View>
-                
+
 
                 <View style={styles.seachAndFilter}>
                     <Ionicons name="search" size={24} color="black" style={styles.searchicon} />
@@ -73,7 +74,7 @@ export default function HomeScreen({ navigation }) {
 
                         <TouchableWithoutFeedback  >
                             <View style={styles.SignUpButton}>
-                                <Text style={{ color: "#fff", fontWeight: 600 }}>
+                                <Text style={{ color: WHITE_COLORS.WHITE, fontWeight: 600 }}>
                                     CHECK NOW
                                 </Text>
                             </View>
@@ -87,10 +88,10 @@ export default function HomeScreen({ navigation }) {
 
 
                 <View style={styles.label}>
-                    <Text style={{ color: "#808080", fontSize: 19, fontWeight: 600 }}>Catergories</Text>
+                    <Text style={{ color: GRAY_COLORS.GRAY, fontSize: 19, fontWeight: 600 }}>Catergories</Text>
                     <Text
                         onPress={() => navigation.navigate('CategoryScreen')}
-                        style={{ color: myColors.primary, fontWeight: "bold", fontSize: 16 }}
+                        style={{ color: GREEN_COLORS.GREEN, fontWeight: "bold", fontSize: 16 }}
                     >
                         See all
                     </Text>
@@ -104,11 +105,11 @@ export default function HomeScreen({ navigation }) {
 
 
                 <View style={styles.marketlabel}>
-                    <Text style={{ color: "#808080", fontSize: 18, fontWeight: 600 }}>Markets</Text>
+                    <Text style={{ color: GRAY_COLORS.GRAY, fontSize: 18, fontWeight: 600 }}>Markets</Text>
                     <Text
                         onPress={() => navigation.navigate('Markets')}
                         style={{
-                            color: "#53E559",
+                            color: GREEN_COLORS.GREEN,
                             fontWeight: "bold"
                         }}
                     >See all</Text>
@@ -123,7 +124,7 @@ export default function HomeScreen({ navigation }) {
 
 
                 <View style={styles.recommendedlabel}>
-                    <Text style={{ color: "#808080", fontSize: 18, fontWeight: 600 }}>Recommended for you</Text>
+                    <Text style={{ color: GRAY_COLORS.GRAY, fontSize: 18, fontWeight: 600 }}>Recommended for you</Text>
 
                 </View>
 
@@ -134,18 +135,18 @@ export default function HomeScreen({ navigation }) {
 
 
                 <View style={styles.taglabel}>
-                    <Text style={{ color: "#808080", fontSize: 18, fontWeight: 600 }}>Tags</Text>
+                    <Text style={{ color: GRAY_COLORS.GRAY, fontSize: 18, fontWeight: 600 }}>Tags</Text>
 
                 </View>
 
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.tags}>
                     <View style={styles.tag}>
-                        <Text style={{ color: "#fff", fontSize: 15, fontWeight: "bold" }}>Fruits</Text>
+                        <Text style={{ color: WHITE_COLORS.WHITE, fontSize: 15, fontWeight: "bold" }}>Fruits</Text>
                     </View>
                     <View style={{
                         height: 50,
                         width: 180,
-                        backgroundColor: "#CD4040",
+                        backgroundColor: TOMATO_COLORS.TOMATO,
                         justifyContent: "center",
                         alignItems: "center",
                         borderBottomRightRadius: 20,
@@ -153,13 +154,13 @@ export default function HomeScreen({ navigation }) {
                         borderTopRightRadius: 20,
                         marginHorizontal: 10,
                     }}>
-                        <Text style={{ color: "#fff", fontSize: 15, fontWeight: "bold" }}>Tomato</Text>
+                        <Text style={{ color: WHITE_COLORS.WHITE, fontSize: 15, fontWeight: "bold" }}>Tomato</Text>
                     </View>
                     <View
                         style={{
                             height: 50,
                             width: 180,
-                            backgroundColor: "#DFA436",
+                            backgroundColor: ORANGE_COLORS.ORANGE,
                             justifyContent: "center",
                             alignItems: "center",
                             borderBottomRightRadius: 20,
@@ -167,7 +168,7 @@ export default function HomeScreen({ navigation }) {
                             borderTopRightRadius: 20,
                             marginHorizontal: 10,
                         }}>
-                        <Text style={{ color: "#fff", fontSize: 15, fontWeight: "bold" }}>Juice</Text>
+                        <Text style={{ color: WHITE_COLORS.WHITE, fontSize: 15, fontWeight: "bold" }}>Juice</Text>
                     </View>
 
 
@@ -191,26 +192,26 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: 15,
-        paddingVertical:15
+        paddingVertical: 15
     },
     marketlabel: {
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: 15,
-        paddingVertical:15
+        paddingVertical: 15
     },
     taglabel: {
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: 15,
-        paddingVertical:15
+        paddingVertical: 15
     },
 
     recommendedlabel: {
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: 15,
-        paddingVertical:15
+        paddingVertical: 15
     },
 
 
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
 
     },
     name: {
-        left: 5,
+
         fontWeight: "bold"
     },
     nameAndpicture: {
@@ -234,8 +235,8 @@ const styles = StyleSheet.create({
     profileAndnotification: {
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingVertical:10,
-         
+        paddingVertical: 10,
+
     },
     notificationIcon: {
         right: 20,
@@ -246,8 +247,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        paddingVertical:5
-        
+        paddingVertical: 5
+
 
     },
     searchicon: {
@@ -269,7 +270,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFFFFF",
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingVertical:15
+        paddingVertical: 15
     },
 
     discountimage: {
@@ -301,10 +302,10 @@ const styles = StyleSheet.create({
     },
 
     categories: {
-        paddingVertical:15
+        paddingVertical: 15
 
     },
-    
+
     markets: {
         alignItems: "center",
         justifyContent: "center"
@@ -322,7 +323,7 @@ const styles = StyleSheet.create({
 
     },
 
-     
+
     tags: {
         marginBottom: 30,
         paddingVertical: 5,

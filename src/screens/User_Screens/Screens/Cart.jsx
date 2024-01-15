@@ -19,12 +19,12 @@ import {
   decrementQuantity,
   incrementQuantity,
   removeFromCart,
-} from "../../Redux/CartSlice";
+} from "../../../../Redux/CartSlice";
 import { FlatList } from "react-native-gesture-handler";
-import { myColors } from "../utils/Mycolors";
+import { BLACK_COLORS, GRAY_COLORS, GREEN_COLORS, WHITE_COLORS, } from "../../../utils/Mycolors";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-const checkoutline = require("../../assets/checkoutline.png");
+const checkoutline = require("../../../../assets/checkoutline.png");
 
 export default function Cart({ navigation }) {
   const nav = useNavigation();
@@ -50,10 +50,10 @@ export default function Cart({ navigation }) {
             <View
               style={{
                 height: responsiveHeight(17),
-                borderBottomColor: "#e3e3e3",
+                borderBottomColor: GRAY_COLORS.LIGHT_GRAY,
                 borderBottomWidth: 2,
                 flexDirection: "row",
-                backgroundColor: "#fff",
+                backgroundColor: WHITE_COLORS.WHITE,
                 borderRadius: 20,
               }}
             >
@@ -74,7 +74,7 @@ export default function Cart({ navigation }) {
               {/* Child 2 */}
               <View
                 style={{
-                  // backgroundColor: "yellow",
+                  
                   flex: 0.7,
                   paddingHorizontal: 10,
                   justifyContent: "center",
@@ -90,7 +90,7 @@ export default function Cart({ navigation }) {
                 >
                   <Text
                     style={{
-                      color: "#151C23",
+                      color: BLACK_COLORS.BLACK,
                       fontSize: 20,
                       fontWeight: "600",
                     }}
@@ -121,7 +121,7 @@ export default function Cart({ navigation }) {
                         padding: 5,
                         borderRadius: 5,
                         borderWidth: 2,
-                        borderColor: "#53E559",
+                        borderColor: GREEN_COLORS.GREEN,
                       }}
                       name="minus"
                       size={24}
@@ -137,7 +137,7 @@ export default function Cart({ navigation }) {
                         padding: 5,
                         borderRadius: 5,
                         borderWidth: 2,
-                        borderColor: "#53E559",
+                        borderColor: GREEN_COLORS.GREEN,
                       }}
                       name="plus"
                       size={24}
@@ -176,8 +176,8 @@ export default function Cart({ navigation }) {
             paddingHorizontal: 5,
           }}
         >
-          <Text style={{ color: "#808080", fontSize: 15 }}>Price</Text>
-          <Text style={{ color: "#808080", fontSize: 15 }}>{amount}</Text>
+          <Text style={{ color: GRAY_COLORS.GRAY, fontSize: 15 }}>Price</Text>
+          <Text style={{ color: GRAY_COLORS.GRAY, fontSize: 15 }}>{amount}</Text>
         </View>
 
         <View
@@ -188,8 +188,8 @@ export default function Cart({ navigation }) {
             paddingHorizontal: 5,
           }}
         >
-          <Text style={{ color: "#808080", fontSize: 15 }}>Discount</Text>
-          <Text style={{ color: "#808080", fontSize: 15 }}>0</Text>
+          <Text style={{ color: GRAY_COLORS.GRAY, fontSize: 15 }}>Discount</Text>
+          <Text style={{ color: GRAY_COLORS.GRAY, fontSize: 15 }}>0</Text>
         </View>
 
         <View style={{ alignItems: "center" }}>
@@ -204,8 +204,8 @@ export default function Cart({ navigation }) {
             paddingHorizontal: 5,
           }}
         >
-          <Text style={{ color: "#808080", fontSize: 15 }}>Total Price</Text>
-          <Text style={{ color: "#808080", fontSize: 15 }}>
+          <Text style={{ color:  GRAY_COLORS.GRAY, fontSize: 15 }}>Total Price</Text>
+          <Text style={{ color:  GRAY_COLORS.GRAY, fontSize: 15 }}>
             {amount}
           </Text>
         </View>
@@ -216,14 +216,14 @@ export default function Cart({ navigation }) {
           }}
           activeOpacity={0.8}
           style={{
-            backgroundColor: myColors.primary,
+            backgroundColor: GREEN_COLORS.GREEN,
             borderRadius: 15,
             height: 70,
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <Text style={{ color: "#fff", fontSize: 18, fontWeight: "700" }}>
+          <Text style={{ color: WHITE_COLORS.WHITE, fontSize: 18, fontWeight: "700" }}>
             CHECKOUT
           </Text>
         </TouchableOpacity>

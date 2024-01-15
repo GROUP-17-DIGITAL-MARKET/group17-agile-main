@@ -3,25 +3,58 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, Switch, } from 'react-
 const entryImage = require('../../assets/discountbannerimage.png');
 import { EvilIcons, AntDesign, FontAwesome, Ionicons, } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import {   db } from '../../config/firebase';
+import { doc, getDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 const deliverylocationicons = require('../../assets/deliverylocationicons.png');
 
-export default function ShopperNotAcceptingOrders({ navigation }) {
-    const nav = useNavigation()
+ 
 
+export default function ShopperNotAcceptingOrders({ navigation }) {
+    const [userInfo, setUserInfo] = useState(null);
+    const nav = useNavigation()
+    
 
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+
+    const getData = async () => {
+        const docRef = doc(db, "Shoppers", "e9LBlNmAyieC3Ne5flLFpzCuuLd2");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            setUserInfo(docSnap.data());
+        } else {
+            console.log("No such document!");
+        }
+    };
+    const getUserData = async () => {
+        const querySnapshot = await getDocs(collection(db, "Shoppers"));
+        querySnapshot.forEach((doc) => {
+            console.log(doc.id, " => ", doc.data());
+            setUserInfo(doc.data())
+        });
+    };
+
+
+
+    useEffect(() => {
+        // getData();
+        getUserData();
+    }, []);
+
+     
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.profileAndnotification} >
                 <TouchableOpacity onPress={() => nav.navigate('ProfileScreen')} style={styles.nameAndpicture}>
                     <Image onPress={() => nav.navigate('ProfileScreen')} source={entryImage} style={styles.image} />
                     <View>
-                        <Text onPress={() => nav.navigate('ProfileScreen')} style={styles.name}>Hi Selassi</Text>
+                        <Text onPress={() => nav.navigate('ProfileScreen')} style={styles.name}>Hi, {userInfo?.Name}</Text>
                         <Text onPress={() => nav.navigate('ProfileScreen')} style={{ color: "#808080" }}>Stay safe on the road</Text>
                     </View>
 
@@ -34,7 +67,7 @@ export default function ShopperNotAcceptingOrders({ navigation }) {
             <View style={{
                 justifyContent: "space-around",
                 height: 50,
-                backgroundColor: isEnabled ? "#00FF00" : "#808080", 
+                backgroundColor: isEnabled ? "#00FF00" : "#808080",
                 borderRadius: 100
 
             }}>
@@ -51,7 +84,7 @@ export default function ShopperNotAcceptingOrders({ navigation }) {
             </View>
 
 
-            <ScrollView showsVerticalScrollIndicator={false} style={{gap:20}}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ gap: 20 }}>
                 <TouchableOpacity style={{
                     height: 172,
                     borderRadius: 20,
@@ -59,7 +92,7 @@ export default function ShopperNotAcceptingOrders({ navigation }) {
                     borderColor: "#D9D9D9",
                     gap: 20,
                     backgroundColor: isEnabled ? "#FFFFFF" : "#e3e3e3",
-                    
+
 
                 }} onPress={() => navigation.navigate('ShopperTracker')}>
                     <View style={{
@@ -103,7 +136,7 @@ export default function ShopperNotAcceptingOrders({ navigation }) {
 
                 <View style={{
                     height: 172,
-                     
+
                     borderRadius: 20,
                     borderBottomWidth: 2,
                     borderColor: "#D9D9D9",
@@ -114,7 +147,7 @@ export default function ShopperNotAcceptingOrders({ navigation }) {
                     <View style={{
                         justifyContent: "space-between",
                         flexDirection: "row",
-                         height: 35,
+                        height: 35,
                         backgroundColor: "#51E74E",
                         borderTopLeftRadius: 20,
                         borderTopRightRadius: 20,
@@ -293,7 +326,7 @@ export default function ShopperNotAcceptingOrders({ navigation }) {
                 </View>
 
 
-                
+
 
 
 

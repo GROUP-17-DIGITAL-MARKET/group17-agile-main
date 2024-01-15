@@ -6,8 +6,10 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView,
+ 
+ 
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
 const badge = require("../../assets/shopperearningbadge.png");

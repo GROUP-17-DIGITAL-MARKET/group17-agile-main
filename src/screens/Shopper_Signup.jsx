@@ -3,62 +3,66 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
-  TouchableWithoutFeedback,
-  ScrollView,
   TextInput,
-  SafeAreaView,
   Alert,
-  Modal,
 } from "react-native";
 import {
-  EvilIcons,
   AntDesign,
   FontAwesome,
   Ionicons,
 } from "@expo/vector-icons";
-import { myColors } from "../utils/Mycolors";
+
+import { GRAY_COLORS, GREEN_COLORS, WHITE_COLORS, myColors } from "../utils/Mycolors";
 import { KeyboardAvoidingView } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { authentication, database } from "../../config/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import uuid from "react-native-uuid";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { auth, db } from "../../config/firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { useNavigation } from '@react-navigation/native';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
+
 
 export default function ShopperSignupScreen({ navigation }) {
   const [isVisible, setisVisible] = useState(true);
-  const [userCredencials, setuserCredencials] = useState({
-    email: "",
-    password: "",
-    name: "",
-  });
+  const nav = useNavigation()
 
-  const { email, password, name } = userCredencials;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  // const [phone, setPhone] = useState ("");
+  const [loading, setLoading] = useState(false);
 
-  const uid = uuid.v4();
-  const userAccount = () => {
-    createUserWithEmailAndPassword(authentication, email, password)
-      .then(() => {
-        navigation.navigate("ShopperSigninScreen");
-        setDoc(doc(database, "Shoppers", uid), {
-          username: name,
-          email: email,
-          id: authentication.currentUser.uid,
+
+
+  const handleSignup = async () => {
+    setLoading(true);
+    await createUserWithEmailAndPassword(auth, email.trim(), password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setLoading(false);
+        setDoc(doc(db, "Shoppers", user.uid), {
+          Name: username,
+          Email: email,
+          // PhoneNumber: phone,
+          CreatedAt: new Date().toUTCString(),
         });
+        nav.replace('ShopperSigninScreen')
       })
-      .catch((error) => {
-        if (error.code === "auth/email-already-in-use") {
-          Alert.alert("That email address is already in use!");
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          Alert.alert('That email address is already in use!');
         }
 
-        if (error.code === "auth/invalid-email") {
-          console.log("That email address is invalid!");
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
         }
 
         console.error(error);
       });
   };
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -71,7 +75,7 @@ export default function ShopperSignupScreen({ navigation }) {
           size={30}
           color="black"
           style={{
-            color: myColors.primary,
+            color: GREEN_COLORS.GREEN,
             zIndex: 2,
             marginTop: 20,
             position: "absolute",
@@ -85,11 +89,11 @@ export default function ShopperSignupScreen({ navigation }) {
           style={{
             marginTop: 50,
             fontWeight: "bold",
-            color: myColors.primary,
+            color: GREEN_COLORS.GREEN,
             fontSize: 25,
           }}
         >
-          Sign Up 
+          Sign Up
         </Text>
       </View>
 
@@ -100,7 +104,7 @@ export default function ShopperSignupScreen({ navigation }) {
             size={30}
             color="black"
             style={{
-              color: myColors.fifth,
+              color: GRAY_COLORS.MEDIUM_GRAY,
               marginTop: 0,
               marginLeft: 5,
               position: "absolute",
@@ -110,10 +114,8 @@ export default function ShopperSignupScreen({ navigation }) {
           <TextInput
             placeholder="Username"
             style={styles.textInput}
-            value={name}
-            onChangeText={(value) => {
-              setuserCredencials({ ...userCredencials, name: value });
-            }}
+            value={username}
+            onChangeText={(text) => setUsername(text)}
           />
         </KeyboardAvoidingView>
 
@@ -123,7 +125,7 @@ export default function ShopperSignupScreen({ navigation }) {
             size={30}
             color="black"
             style={{
-              color: myColors.fifth,
+              color: GRAY_COLORS.MEDIUM_GRAY,
               marginTop: 0,
               marginLeft: 5,
               position: "absolute",
@@ -135,9 +137,7 @@ export default function ShopperSignupScreen({ navigation }) {
             keyboardType="email-address"
             style={styles.textInput}
             value={email}
-            onChangeText={(value) => {
-              setuserCredencials({ ...userCredencials, email: value });
-            }}
+            onChangeText={(text) => setEmail(text)}
           />
         </KeyboardAvoidingView>
 
@@ -147,7 +147,7 @@ export default function ShopperSignupScreen({ navigation }) {
             size={30}
             color="black"
             style={{
-              color: myColors.fifth,
+              color: GRAY_COLORS.MEDIUM_GRAY,
               marginTop: 0,
               marginLeft: 5,
               position: "absolute",
@@ -160,9 +160,7 @@ export default function ShopperSignupScreen({ navigation }) {
             placeholder="Password"
             style={styles.textInput}
             value={password}
-            onChangeText={(value) => {
-              setuserCredencials({ ...userCredencials, password: value });
-            }}
+            onChangeText={(text) => setPassword(text)}
           />
           <Ionicons
             name={isVisible == true ? "eye-off-outline" : "eye-outline"}
@@ -172,7 +170,7 @@ export default function ShopperSignupScreen({ navigation }) {
             size={30}
             color="black"
             style={{
-              color: myColors.fifth,
+              color: GRAY_COLORS.MEDIUM_GRAY,
               marginTop: 0,
               marginLeft: 310,
               position: "absolute",
@@ -190,8 +188,8 @@ export default function ShopperSignupScreen({ navigation }) {
           marginVertical: 30,
         }}
       >
-        <TouchableOpacity style={styles.signupButtontext} onPress={userAccount}>
-          <Text style={{ fontSize: 18, fontWeight: 600, color: "#fff" }}>
+        <TouchableOpacity style={styles.signupButtontext} onPress={handleSignup}>
+          <Text style={{ fontSize: 18, fontWeight: 600, color: WHITE_COLORS.WHITE }}>
             SIGN UP
           </Text>
         </TouchableOpacity>
@@ -207,7 +205,7 @@ export default function ShopperSignupScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: WHITE_COLORS.WHITE,
     paddingTop: 40,
   },
 
@@ -219,7 +217,7 @@ const styles = StyleSheet.create({
   textInput: {
     height: 50,
     width: 350,
-    backgroundColor: myColors.fourth,
+    backgroundColor: GRAY_COLORS.LIGHT_GRAY,
     borderRadius: 40,
     paddingHorizontal: 40,
   },
@@ -230,7 +228,7 @@ const styles = StyleSheet.create({
   },
 
   signupButtontext: {
-    backgroundColor: myColors.primary,
+    backgroundColor: GREEN_COLORS.GREEN,
     height: 60,
     width: 200,
     borderRadius: 40,
@@ -239,7 +237,7 @@ const styles = StyleSheet.create({
   },
   curve: {
     flex: 0.7,
-    backgroundColor: myColors.primary,
+    backgroundColor: GREEN_COLORS.GREEN,
     borderTopLeftRadius: 190,
     borderTopRightRadius: 190,
   },

@@ -17,7 +17,7 @@ import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FlatList } from "react-native-gesture-handler";
-import { myColors } from "../utils/Mycolors";
+import { BLACK_COLORS, GRAY_COLORS, GREEN_COLORS, WHITE_COLORS, myColors } from "../../../utils/Mycolors";
 import { useNavigation } from "@react-navigation/native";
 import ProgressSteps, {
   Title,
@@ -59,7 +59,7 @@ export default function Ordersdetails({ navigation }) {
       <View
         style={{
           flex: 1,
-          backgroundColor: "#FFFFFF",
+          backgroundColor: WHITE_COLORS.WHITE,
           borderRadius: 20,
           paddingHorizontal: 20,
           paddingVertical: 20
@@ -88,17 +88,17 @@ export default function Ordersdetails({ navigation }) {
             colors={{
               title: {
                 text: {
-                  normal: "#151C23",
-                  active: "#151C23",
-                  completed: "#151C23",
+                  normal: BLACK_COLORS.BLACK,
+                  active: BLACK_COLORS.BLACK,
+                  completed: BLACK_COLORS.BLACK,
                   size: 17,
                 },
               },
               marker: {
                 text: {
-                  normal: "#FFFFFF",
-                  active: "#FFFFFF",
-                  completed: "#FFFFFF",
+                  normal: WHITE_COLORS.WHITE,
+                  active: WHITE_COLORS.WHITE,
+                  completed: WHITE_COLORS.WHITE,
                 },
                 line: {
                   normal: "#008000",
@@ -122,7 +122,7 @@ export default function Ordersdetails({ navigation }) {
               style={{
                 height: responsiveHeight(10),
                 flexDirection: "row",
-                backgroundColor: "#FFFFFF",
+                backgroundColor: WHITE_COLORS.WHITE,
                 borderRadius: 20,
               }}
             >
@@ -157,7 +157,7 @@ export default function Ordersdetails({ navigation }) {
                 >
                   <Text
                     style={{
-                      color: "#151C23",
+                      color: BLACK_COLORS.BLACK,
                       fontSize: 17,
                       fontWeight: "normal",
                     }}
@@ -168,7 +168,7 @@ export default function Ordersdetails({ navigation }) {
                     style={{
                       fontSize: 17,
                       fontWeight: "bold",
-                      color: "#151C230",
+                      color: BLACK_COLORS.BLACK,
                     }}
                   >
                     {item.quantity * item.price}
@@ -205,15 +205,15 @@ export default function Ordersdetails({ navigation }) {
             paddingVertical: 20,
           }}
         >
-          <Text style={{ color: "#808080", fontSize: 15 }}>Total Price</Text>
-          <Text style={{ color: "#808080", fontSize: 15 }}>{amount}</Text>
+          <Text style={{ color: GRAY_COLORS.GRAY, fontSize: 15 }}>Total Price</Text>
+          <Text style={{ color: GRAY_COLORS.GRAY, fontSize: 15 }}>{amount}</Text>
           
         </View>
         <View style={{ justifyContent: "flex-end", alignItems: "center", marginHorizontal: 20,   }}>
             <TouchableOpacity 
             onPress={() => navigation.navigate('JustDeliveredOrder')}
             style={styles.CompletepButtontext} >
-              <Text style={{ fontSize: 18, fontWeight: 600, color: "#FFFFFF" }}>
+              <Text style={{ fontSize: 18, fontWeight: 600, color: WHITE_COLORS.WHITE }}>
                  Complete
               </Text>
             </TouchableOpacity>
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   CompletepButtontext:{
-    backgroundColor:"#53E559",
+    backgroundColor:GREEN_COLORS.GREEN,
     width:250,
     alignItems:"center",
     justifyContent:"center",

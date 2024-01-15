@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity,  Alert } from 'react-native';
-import { authentication, firebaseReauthenticateWithCredential, firebaseUpdatePassword } from '../../config/firebase';
-import { myColors } from '../utils/Mycolors';
+import { authentication, firebaseReauthenticateWithCredential, firebaseUpdatePassword } from '../../../../config/firebase';
+import { GREEN_COLORS, WHITE_COLORS, myColors } from '../../../utils/Mycolors';
 import { EmailAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { signOut } from 'firebase/auth';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, Feather} from '@expo/vector-icons';
+
 export default function ChangePassword({navigation}) {
   const nav = useNavigation()
   const [currentPassword, setCurrentPassword] = useState('');
@@ -86,7 +87,7 @@ export default function ChangePassword({navigation}) {
         onPress={handleChangePassword}
         style={styles.changePasswordButton}
       >
-        <Text style={{ fontSize: 20, fontWeight: 600, color: "#fff" }}>Change Password</Text>
+        <Text style={{ fontSize: 20, fontWeight: 600, color: WHITE_COLORS.WHITE }}>Change Password</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -95,7 +96,7 @@ export default function ChangePassword({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: WHITE_COLORS.WHITE,
     alignItems:"center",
     gap:30,
      
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   changePasswordButton: {
-    backgroundColor: myColors.primary,
+    backgroundColor: GREEN_COLORS.GREEN,
     height: 60,
     width:291,
     borderRadius: 20,

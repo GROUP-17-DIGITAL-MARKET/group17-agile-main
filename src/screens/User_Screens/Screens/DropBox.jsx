@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, ScrollView } from 'react-native';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import { Dropdown } from '../utils/Data';
+import { Dropdown } from '../../../utils/Data';
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
+import { GRAY_COLORS } from '../../../utils/Mycolors';
 
 
 export default function DropBox({ navigation }) {
@@ -21,7 +22,7 @@ export default function DropBox({ navigation }) {
                 flexDirection:"row",
                 alignItems:"center",
                 justifyContent:"space-between",
-                borderBottomColor:"#e3e3e3",
+                borderBottomColor: GRAY_COLORS.MEDIUM_GRAY,
                 borderBottomWidth:2,
                 marginBottom:10,
                 paddingVertical:20

@@ -22,7 +22,7 @@ export default function JustDeliveredOrder({navigation}) {
                 <TouchableOpacity
                     style={styles.RateButton}
                     activeOpacity={0.8}
-                    onPress={() => navigation.navigate('Review')}>
+                    onPress={() => navigation.navigate('RateProduct')}>
                         <Text style={{ color: "#fff", fontWeight: "bold" }}>RATE THE PRODUCT </Text>      
                 </TouchableOpacity>
                 <TouchableOpacity

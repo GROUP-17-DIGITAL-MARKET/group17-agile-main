@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { recommended } from '../utils/Data';
+import { recommended } from '../../../utils/Data';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../../Redux/CartSlice';
+import { addToCart, removeFromCart } from '../../../../Redux/CartSlice';
 
 
 

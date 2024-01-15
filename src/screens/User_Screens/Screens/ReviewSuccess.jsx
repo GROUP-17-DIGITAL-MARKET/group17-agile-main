@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-const Success = require('../../assets/Success.png');
+const Success = require('../../../../assets/Success.png');
 
 export default function ReviewSuccess({ navigation }) {
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { myColors } from '../utils/Mycolors';
+import { myColors } from '../../../utils/Mycolors';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';

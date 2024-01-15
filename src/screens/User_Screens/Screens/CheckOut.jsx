@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,} from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import CustomTopTabNavigator from '../../Payments/MainRecommendationList';
+import CustomTopTabNavigator from '../../../../Payments/MainRecommendationList';
 
 import * as Location from 'expo-location';
 import { SafeAreaView } from 'react-native-safe-area-context';

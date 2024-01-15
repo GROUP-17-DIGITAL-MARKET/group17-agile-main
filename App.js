@@ -4,34 +4,33 @@ import { ToastProvider } from 'react-native-toast-notifications'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, AntDesign, Ionicons, FontAwesome, Feather, MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import EntryScreen from './src/screens/entry-screen';
-import SignupScreen from './src/screens/Signup-screen';
-import SigninScreen from './src/screens/signin-screen';
-import HomeScreen from './src/screens/home-screen';
-import Splash from './src/screens/Splash-screen';
-import UserShopperEntry from './src/screens/UserShopperEntry';
-import Details from './src/screens/details';
-import ChangePassword from './src/screens/ChangePassword';
-import ProfileScreen from './src/screens/ProfileScreen';
-import Category from './src/screens/category';
-import FruitsAndVegetables from './src/screens/FruitsAndVegetables';
-import Spices from './src/screens/Spices';
-import Cereals from './src/screens/Cereals';
-import Markets from './src/screens/Markets';
-import Cart from './src/screens/Cart';
-import OderPlaced from './src/screens/Order-placed';
-import Checkout from './src/screens/CheckOut';
+import EntryScreen from './src/screens/User_Screens/Auth/entry-screen';
+import SignupScreen from './src/screens/User_Screens/Auth/Signup-screen';
+import SigninScreen from './src/screens/User_Screens/Auth/signin-screen';
+import HomeScreen from './src/screens/User_Screens/Screens/home-screen';
+import Splash from './src/screens/User_Screens/Screens/Splash-screen';
+import UserShopperEntry from './src/screens/User_Screens/Screens/UserShopperEntry';
+import Details from './src/screens/User_Screens/Screens/details';
+import ChangePassword from './src/screens/User_Screens/Screens/ChangePassword';
+import ProfileScreen from './src/screens/User_Screens/Screens/ProfileScreen';
+import Category from './src/screens/User_Screens/Screens/category';
+import FruitsAndVegetables from './src/screens/User_Screens/Screens/FruitsAndVegetables';
+import Spices from './src/screens/User_Screens/Screens/Spices';
+import Cereals from './src/screens/User_Screens/Screens/Cereals';
+import Markets from './src/screens/User_Screens/Screens/Markets';
+import Cart from './src/screens/User_Screens/Screens/Cart';
+import OderPlaced from './src/screens/User_Screens/Screens/Order-placed';
+import Checkout from './src/screens/User_Screens/Screens/CheckOut';
 import { Provider } from 'react-redux';
 import { Store } from './Redux/Store';
-import TrackOrder from './src/screens/Track_order_Screen';
-import UserNotification from './src/screens/User_Notification';
+import TrackOrder from './src/screens/User_Screens/Screens/Track_order_Screen';
+import UserNotification from './src/screens/User_Screens/Screens/User_Notification';
 import DeliveryNotification from './src/components/Notifications/Delivery';
 import NewsUpdatesNotification from './src/components/Notifications/News Updates';
-import Myorders from './src/screens/My_Orders';
-import Ordersdetails from './src/screens/Ordersdetails';
-import Review from './src/screens/Review';
+import Myorders from './src/screens/User_Screens/Screens/My_Orders';
+import Ordersdetails from './src/screens/User_Screens/Screens/Ordersdetails';
+import RateProduct from './src/screens/User_Screens/Screens/RateProduct';
 import JustDeliveredOrder from './src/screens/JustDeliveredOrderScreen';
-
 
 // Vendor
 
@@ -43,13 +42,12 @@ import ShopperNotAcceptingOrders from './src/screens/Shopper_not_accepting_order
 import ShopperEarnings from './src/screens/Shopper_earnings';
 import ShopperHistory from './src/screens/Shopper_history';
 import ShopperTracker from './src/screens/Shopper_Tracker';
-import ChatScreen from './src/screens/ChatScreen';
+import ChatScreen from './src/screens/User_Screens/Screens/ChatScreen';
 import ShopperReview from './src/screens/Shopper-Review';
-import ReviewSuccess from './src/screens/ReviewSuccess';
+import ReviewSuccess from './src/screens/User_Screens/Screens/ReviewSuccess';
 
 
-
-
+ 
 
 
 
@@ -58,6 +56,7 @@ const Stack = createStackNavigator();
 
 
 export default function App() {
+ 
 
   return (
     <Provider store={Store}>
@@ -94,7 +93,7 @@ export default function App() {
             <Stack.Screen name="Myorders" component={Myorders} />
             <Stack.Screen name="Ordersdetails" component={Ordersdetails} />
             <Stack.Screen name="ChatScreen" component={ChatScreen} />
-            <Stack.Screen name="Review" component={Review} />
+            <Stack.Screen name="RateProduct" component={RateProduct} options={{ headerShown: true }}/>
             <Stack.Screen name="JustDeliveredOrder" component={JustDeliveredOrder} />
             <Stack.Screen name="ReviewSuccess" component={ReviewSuccess} />
 

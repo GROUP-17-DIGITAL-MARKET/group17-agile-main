@@ -2,7 +2,7 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { useNavigation } from '@react-navigation/native';
-import { MarketsList } from '../utils/Data';
+import { MarketsList } from '../../../utils/Data';
 import { SafeAreaView } from 'react-native-safe-area-context';
  
 

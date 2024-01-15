@@ -1,19 +1,19 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, ScrollView, TextInput, Alert, Modal, } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert, KeyboardAvoidingView, ToastAndroid } from 'react-native';
 import { EvilIcons, AntDesign, FontAwesome, Ionicons, } from '@expo/vector-icons';
-import { GRAY_COLORS, GREEN_COLORS, WHITE_COLORS, myColors } from '../utils/Mycolors';
-import { KeyboardAvoidingView } from 'react-native';
+import { GRAY_COLORS, GREEN_COLORS, WHITE_COLORS, myColors } from '../../../utils/Mycolors';
 import { StatusBar } from 'expo-status-bar';
+
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import { useToast } from "react-native-toast-notifications";
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { auth, db } from '../../config/firebase';
+import { useToast } from "react-native-toast-notifications";
+import { auth, db } from '../../../../config/firebase';
 
-export default function ShopperSigninScreen({ navigation }) {
 
+export default function SigninScreen({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ export default function ShopperSigninScreen({ navigation }) {
     const nav = useNavigation()
     const [isVisible, setisVisible] = useState(false);
 
-
+ 
     const handleSignin = async () => {
         setLoading(true);
         await
@@ -38,34 +38,31 @@ export default function ShopperSigninScreen({ navigation }) {
                         offset: 30,
                         animationType: "slide-in",
                     });
-                    nav.replace('ShopperNotAcceptingOrder')
+                    nav.replace('HomeScreen')
                 })
                 .catch((err) => {
                     alert(err.meassage);
                 });
     };
 
-
-
-
     return (
         <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView style={{ flex: 1 }}>
-                <ScrollView style={{ flex: 1 }}>
-                    <StatusBar style='#fff' backgroundColor='#53E559' />
+                <ScrollView>
+                    <StatusBar style='white' backgroundColor='#53E559' />
 
                     <View style={styles.curve}>
-                        <AntDesign onPress={() => navigation.navigate('ShopperEntryScreen')} name="arrowleft" size={30} color="black" style={{ color: myColors.secondary, marginLeft: 10, marginTop: 20 }} />
+                        <AntDesign onPress={() => navigation.navigate('Entry')} name="arrowleft" size={26} color="black" style={{ color: myColors.secondary, marginLeft: 10, marginTop: 10 }} />
                     </View>
 
                     <View style={{ justifyContent: "center", flexDirection: "row" }}>
-                        <Text style={{ marginTop: 50, fontWeight: "bold", color: GREEN_COLORS.GREEN, fontSize: 25 }}>Sign in</Text>
+                        <Text style={{ marginTop: 40, fontWeight: "bold", color: GREEN_COLORS.GREEN, fontSize: 25 }}>Sign in</Text>
                     </View>
 
 
                     <View style={styles.inputcontainer}>
 
-                        <KeyboardAvoidingView style={styles.inputView}>
+                        <View style={styles.inputView}>
                             <Ionicons name="mail" size={30} color="black" style={{ color: GRAY_COLORS.MEDIUM_GRAY, marginTop: 0, marginLeft: 5, position: "absolute", zIndex: 2 }} />
                             <TextInput placeholder='Email'
                                 keyboardType='email-address'
@@ -73,9 +70,9 @@ export default function ShopperSigninScreen({ navigation }) {
                                 value={email}
                                 onChangeText={(text) => setEmail(text)}
                             />
-                        </KeyboardAvoidingView>
+                        </View>
 
-                        <KeyboardAvoidingView style={styles.inputView}>
+                        <View style={styles.inputView}>
                             <FontAwesome name="lock" size={30} color="black" style={{ color: GRAY_COLORS.MEDIUM_GRAY, marginTop: 0, marginLeft: 5, position: "absolute", zIndex: 2 }} />
                             <TextInput
                                 secureTextEntry={isVisible}
@@ -91,7 +88,7 @@ export default function ShopperSigninScreen({ navigation }) {
                                 }}
                                 size={30} color="black" style={{ color: GRAY_COLORS.MEDIUM_GRAY, marginTop: 0, marginLeft: 310, position: "absolute", zIndex: 2 }} />
 
-                        </KeyboardAvoidingView>
+                        </View>
 
 
                     </View>
@@ -112,7 +109,7 @@ export default function ShopperSigninScreen({ navigation }) {
                         </Text>
                     </View>
 
-                    <View style={{ height: 70, top: 5, marginHorizontal: 20 }}>
+                    <View style={{ height: 70, top: 5, marginHorizontal: 20, flex: 0.9 }}>
                         <TouchableOpacity
                             activeOpacity={0.8}
                             style={styles.signupButtontext} onPress={handleSignin} >
@@ -121,7 +118,6 @@ export default function ShopperSigninScreen({ navigation }) {
                             </Text>
                         </TouchableOpacity>
                     </View>
-
                 </ScrollView>
             </KeyboardAvoidingView>
         </SafeAreaView>
@@ -146,15 +142,17 @@ const styles = StyleSheet.create({
     textInput: {
         height: 50,
         width: 350,
-        backgroundColor: myColors.fourth,
+        backgroundColor: GRAY_COLORS.LIGHT_GRAY,
         borderRadius: 40,
         paddingHorizontal: 40
 
     },
 
     inputcontainer: {
-        marginTop: 50,
-        alignItems: "center"
+        marginTop: 40,
+        alignItems: "center",
+        paddingVertical: 10
+
 
     },
     signupButtontext: {

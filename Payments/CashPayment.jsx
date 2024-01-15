@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Paystack, paystackProps } from 'react-native-paystack-webview';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { myColors } from '../src/utils/Mycolors';
+import { GREEN_COLORS, WHITE_COLORS, myColors } from '../src/utils/Mycolors';
 
 
 
@@ -18,7 +18,7 @@ export default function CashPayment({ navigation }) {
             <TouchableOpacity
                 onPress={() => navigation.navigate('OderPlaced')}
                 style={{
-                    backgroundColor: myColors.primary,
+                    backgroundColor: GREEN_COLORS.GREEN,
                     width: 200,
                     height: 46,
                     alignItems: "center",
@@ -26,7 +26,7 @@ export default function CashPayment({ navigation }) {
                     borderRadius: 10,
                     marginVertical: 20
                 }}>
-                <Text style={{ fontSize: 18, fontWeight: 600, color: "#fff" }}>
+                <Text style={{ fontSize: 18, fontWeight: 600, color: WHITE_COLORS.WHITE }}>
                     Proceed
                 </Text>
             </TouchableOpacity>

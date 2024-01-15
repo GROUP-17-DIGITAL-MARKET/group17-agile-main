@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, FlatList, Text, StyleSheet, SafeAreaView, ImageBackground, TouchableOpacity } from 'react-native';
-const background = require('../../assets/profilebackground.png');
+const background = require('../../../../assets/profilebackground.png');
 
 import { Ionicons } from '@expo/vector-icons';
+import { BLACK_COLORS, GREEN_COLORS, WHITE_COLORS } from '../../../utils/Mycolors';
 
 
 const ChatScreen = ({navigation}) => {
@@ -11,7 +12,7 @@ const ChatScreen = ({navigation}) => {
 
   const handleSendMessage = () => {
     if (inputText.trim() === '') {
-      return; // Don't send empty messages
+      return;  
     }
 
     const newMessage = { text: inputText, id: messages.length.toString() };
@@ -30,7 +31,7 @@ const ChatScreen = ({navigation}) => {
            
         }}>
           <Ionicons onPress={() => navigation.goBack()} name="chevron-back" size={28} color="black" />
-          <Text style={{ fontSize: 25, fontWeight: "bold", color: "#000000", textAlign: "center", marginVertical: 20 }} >Chat</Text>
+          <Text style={{ fontSize: 25, fontWeight: "bold", color: BLACK_COLORS.BLACK, textAlign: "center", marginVertical: 20 }} >Chat</Text>
         </View>
        
 
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   messageContainer: {
-    backgroundColor: '#53E559',
+    backgroundColor: GREEN_COLORS.GREEN,
     borderRadius: 10,
     padding: 10,
     marginBottom: 20,
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     height: 53,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: WHITE_COLORS.WHITE,
     marginRight: 10,
     paddingVertical: 5,
     paddingHorizontal: 10,

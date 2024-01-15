@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { GREEN_COLORS, ORANGE_COLORS, WHITE_COLORS } from '../../../utils/Mycolors';
 
-const entryImage = require('../../assets/entry-image.jpg');
+const entryImage = require('../../../../assets/entry-image.jpg');
 
 
 
@@ -29,7 +30,7 @@ export default function EntryScreen({ navigation }) {
                     activeOpacity={0.8}
                     onPress={() => navigation.navigate('Signin')}>
                     <View style={styles.SignInButton}>
-                        <Text style={{ color: "#fff", fontWeight: "bold" }}>SIGN IN</Text>
+                        <Text style={{ color: WHITE_COLORS.WHITE, fontWeight: "bold" }}>SIGN IN</Text>
                     </View>
                 </TouchableOpacity>
 
@@ -37,7 +38,7 @@ export default function EntryScreen({ navigation }) {
                     activeOpacity={0.8}
                     onPress={() => navigation.navigate('Signup')}>
                     <View style={styles.SignUpButton}>
-                        <Text style={{ color: "#53E559", fontWeight: "bold", }}>CREATE AN ACCOUNT</Text>
+                        <Text style={{ color: GREEN_COLORS.GREEN, fontWeight: "bold", }}>CREATE AN ACCOUNT</Text>
                     </View>
                 </TouchableOpacity>
 
@@ -52,7 +53,7 @@ export default function EntryScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: WHITE_COLORS.WHITE,
     },
 
     image: {
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     freshDescription: {
         fontSize: 22,
         display: "flex",
-        color: '#DFA436',
+        color: ORANGE_COLORS.ORANGE,
         top: 15,
         display: "flex",
         textAlign: "center"
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     SignInButton: {
-        backgroundColor: "#53E559",
+        backgroundColor: GREEN_COLORS.GREEN,
         color: "#fff",
         alignItems: "center",
         justifyContent: "center",
@@ -88,8 +89,8 @@ const styles = StyleSheet.create({
     },
 
     SignUpButton: {
-        backgroundColor: "#fff",
-        color: "#fff",
+        backgroundColor: WHITE_COLORS.WHITE,
+        color: WHITE_COLORS.WHITE,
         alignItems: "center",
         justifyContent: "center",
         paddingVertical: 20,
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginTop: 20,
         borderWidth: 2,
-        borderColor: "#53E559"
+        borderColor: GREEN_COLORS.GREEN
     }
 
 });

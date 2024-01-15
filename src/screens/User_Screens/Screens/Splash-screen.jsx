@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { View, Text, Image, Animated, Easing } from 'react-native';
-import { myColors } from '../utils/Mycolors';
+import { BLACK_COLORS, GREEN_COLORS, } from '../../../utils/Mycolors';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
 
-const splashimage = require('../../assets/splashImage.jpg');
+const splashimage = require('../../../../assets/splashImage.jpg');
 
 export default function Splash() {
   const nav = useNavigation();
@@ -51,7 +51,7 @@ export default function Splash() {
               { translateY },
               { rotate },
             ],
-            color: '#141414',
+            color: BLACK_COLORS.BLACK,
             fontSize: 30,
           }}
         >
@@ -68,7 +68,7 @@ export default function Splash() {
   };
 
   return (
-    <View style={{ backgroundColor: "#53E559", flex: 1, justifyContent: "center" }}>
+    <View style={{ backgroundColor:GREEN_COLORS.GREEN, flex: 1, justifyContent: "center" }}>
       <StatusBar style='light' />
       
       <View style={{ justifyContent: "center", alignItems: "center", position: 'relative' }}>

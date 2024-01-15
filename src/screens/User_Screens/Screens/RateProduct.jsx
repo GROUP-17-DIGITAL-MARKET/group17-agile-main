@@ -2,7 +2,7 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { useNavigation } from '@react-navigation/native';
-import { MarketsList } from '../utils/Data';
+import { MarketsList } from '../../../utils/Data';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput } from 'react-native-gesture-handler';
 import StarRating from 'react-native-star-rating-widget';
@@ -11,16 +11,20 @@ import {
     Feather
 } from "@expo/vector-icons";
 import { useSelector } from 'react-redux';
+import { StatusBar } from 'expo-status-bar';
 
 
-export default function Review({navigation}) {
+export default function RateProduct({navigation}) {
     const nav = useNavigation()
     const [rating, setRating] = useState(0);
     const storeData = useSelector((state) => state.CartSlice);
     return (
         <SafeAreaView style={styles.container}>
+            <StatusBar style='#000' />
 
-            <View style={{ height: 220, marginBottom:20}}>
+            {/* <Text style={{fontSize:23, color:"#000", textAlign:"center", }}>Rate Product</Text> */}
+
+            <View style={{ height: 200, marginBottom:20}}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={storeData}
@@ -167,8 +171,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         paddingHorizontal: 20,
-
-        gap: 20
+        
+        gap: 10
 
     },
 
